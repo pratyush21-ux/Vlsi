@@ -1,0 +1,95 @@
+$date
+	Thu Jun  5 06:38:22 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Fa_bh_test $end
+$var wire 1 ! s $end
+$var wire 1 " c $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$var reg 1 % cin $end
+$scope module uut $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 " c $end
+$var wire 1 % cin $end
+$var wire 1 ! s $end
+$var wire 1 & n3 $end
+$var wire 1 ' n2 $end
+$var wire 1 ( n1 $end
+$scope module Ha_bh1 $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var reg 1 ' c $end
+$var reg 1 ( s $end
+$upscope $end
+$scope module Ha_bh2 $end
+$var wire 1 ( a $end
+$var wire 1 % b $end
+$var reg 1 & c $end
+$var reg 1 ! s $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x(
+x'
+x&
+x%
+x$
+x#
+x"
+x!
+$end
+#10000
+0"
+0&
+0!
+0'
+0(
+0%
+0$
+0#
+#20000
+1!
+1%
+#30000
+1(
+0%
+1$
+#40000
+1"
+1&
+0!
+1%
+#50000
+0"
+0&
+1!
+0%
+0$
+1#
+#60000
+1"
+1&
+0!
+1%
+#70000
+0&
+1'
+0(
+0%
+1$
+#80000
+1!
+1%

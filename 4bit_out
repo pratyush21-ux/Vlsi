@@ -1,0 +1,71 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x5a5434e84070 .scope module, "Bit4_mag_comp_test" "Bit4_mag_comp_test" 2 2;
+ .timescale -9 -12;
+v0x5a5434eaabb0_0 .var "A", 3 0;
+v0x5a5434eaac90_0 .var "B", 3 0;
+v0x5a5434eaad30_0 .net "Equal", 0 0, L_0x5a5434eaafc0;  1 drivers
+v0x5a5434eaae00_0 .net "Greater", 0 0, L_0x5a5434eab150;  1 drivers
+v0x5a5434eaaed0_0 .net "Small", 0 0, L_0x5a5434eab240;  1 drivers
+S_0x5a5434e96f80 .scope module, "uut" "Bit4_mag_comp" 2 5, 3 1 0, S_0x5a5434e84070;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "Equal";
+    .port_info 1 /OUTPUT 1 "Greater";
+    .port_info 2 /OUTPUT 1 "Small";
+    .port_info 3 /INPUT 4 "A";
+    .port_info 4 /INPUT 4 "B";
+v0x5a5434e97160_0 .net "A", 3 0, v0x5a5434eaabb0_0;  1 drivers
+v0x5a5434eaa7c0_0 .net "B", 3 0, v0x5a5434eaac90_0;  1 drivers
+v0x5a5434eaa8a0_0 .net "Equal", 0 0, L_0x5a5434eaafc0;  alias, 1 drivers
+v0x5a5434eaa940_0 .net "Greater", 0 0, L_0x5a5434eab150;  alias, 1 drivers
+v0x5a5434eaaa00_0 .net "Small", 0 0, L_0x5a5434eab240;  alias, 1 drivers
+L_0x5a5434eaafc0 .cmp/eq 4, v0x5a5434eaabb0_0, v0x5a5434eaac90_0;
+L_0x5a5434eab150 .cmp/gt 4, v0x5a5434eaabb0_0, v0x5a5434eaac90_0;
+L_0x5a5434eab240 .cmp/gt 4, v0x5a5434eaac90_0, v0x5a5434eaabb0_0;
+    .scope S_0x5a5434e84070;
+T_0 ;
+    %vpi_call 2 7 "$monitor", "Equal=%b,Greater=%b,Small=%b,A=%b,B=%b", v0x5a5434eaad30_0, v0x5a5434eaae00_0, v0x5a5434eaaed0_0, v0x5a5434eaabb0_0, v0x5a5434eaac90_0 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x5a5434e84070;
+T_1 ;
+    %vpi_call 2 10 "$dumpfile", "Magcomwave.vcd" {0 0 0};
+    %vpi_call 2 11 "$dumpvars" {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x5a5434e84070;
+T_2 ;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x5a5434eaabb0_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x5a5434eaac90_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v0x5a5434eaabb0_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0x5a5434eaac90_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v0x5a5434eaabb0_0, 0, 4;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0x5a5434eaac90_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v0x5a5434eaabb0_0, 0, 4;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v0x5a5434eaac90_0, 0, 4;
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Bit4_mag_comp_test.v";
+    "Bit4_mag_comp.v";
