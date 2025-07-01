@@ -1,0 +1,54 @@
+$date
+	Fri Jun  6 06:19:40 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Bit4_mag_comp_test $end
+$var wire 1 ! Small $end
+$var wire 1 " Greater $end
+$var wire 1 # Equal $end
+$var reg 4 $ A [3:0] $end
+$var reg 4 % B [3:0] $end
+$scope module uut $end
+$var wire 4 & A [3:0] $end
+$var wire 4 ' B [3:0] $end
+$var wire 1 ! Small $end
+$var wire 1 " Greater $end
+$var wire 1 # Equal $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 '
+b0 &
+b0 %
+b0 $
+1#
+0"
+0!
+$end
+#10000
+0#
+1"
+b10 $
+b10 &
+#20000
+0"
+1!
+b100 %
+b100 '
+#30000
+b1000 %
+b1000 '
+0#
+1!
+b100 $
+b100 &

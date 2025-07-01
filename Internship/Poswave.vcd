@@ -1,0 +1,78 @@
+$date
+	Fri Jun  6 11:14:38 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Pos_latch_test $end
+$var wire 1 ! q $end
+$var reg 1 " clk $end
+$var reg 1 # d $end
+$var reg 1 $ rst $end
+$scope module uut $end
+$var wire 1 " clk $end
+$var wire 1 # d $end
+$var wire 1 $ rst $end
+$var reg 1 ! q $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1$
+0#
+0"
+0!
+$end
+#5000
+1"
+#10000
+0"
+#12000
+1#
+0$
+#15000
+1!
+1"
+#20000
+0"
+#22000
+0#
+#25000
+0!
+1"
+#30000
+0"
+#32000
+1#
+#35000
+1!
+1"
+#40000
+0"
+#42000
+0!
+1$
+#45000
+1"
+#47000
+1!
+0$
+#50000
+0"
+#55000
+1"
+#57000
+0!
+0#
+#60000
+0"
+#65000
+1"
+#67000
