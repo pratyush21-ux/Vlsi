@@ -1,0 +1,85 @@
+<svg width="680" height="580" viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>UVM ALU testbench architecture with interface</title>
+<desc>tb_top contains the interface, DUT and uvm_test. The alu_if interface bridges testbench components to the DUT.</desc>
+<style>
+  .bg { fill: #FFFFFF; }
+  .t  { font-family: Arial, sans-serif; font-size: 14px; fill: #2C2C2A; }
+  .th { font-family: Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #2C2C2A; }
+  .ts { font-family: Arial, sans-serif; font-size: 12px; fill: #5F5E5A; }
+  .arr { stroke: #73726c; stroke-width: 1.5; fill: none; }
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect class="bg" x="0" y="0" width="680" height="580"/>
+
+<rect x="30" y="26" width="620" height="528" rx="20" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="50" y="52">tb_top</text>
+<text class="ts" x="108" y="52">module: DUT + interface + config_db</text>
+
+<rect x="50" y="66" width="430" height="42" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="68" y="86" fill="#0C447C">alu_test</text>
+<text class="ts" x="68" y="101" fill="#185FA5">creates env, sets num_txn, starts sequence</text>
+
+<rect x="50" y="120" width="430" height="330" rx="14" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="68" y="142" fill="#085041">alu_env</text>
+<text class="ts" x="130" y="142" fill="#0F6E56">connects monitor to scoreboard + coverage</text>
+
+<rect x="68" y="156" width="394" height="172" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="86" y="178" fill="#3C3489">alu_agent</text>
+<text class="ts" x="152" y="178" fill="#534AB7">active: drives + monitors</text>
+
+<rect x="86" y="192" width="170" height="50" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text class="th" x="171" y="214" text-anchor="middle" fill="#712B13">sequence</text>
+<text class="ts" x="171" y="231" text-anchor="middle" fill="#993C1D">makes transactions</text>
+
+<rect x="274" y="192" width="170" height="50" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text class="th" x="359" y="214" text-anchor="middle" fill="#712B13">sequencer</text>
+<text class="ts" x="359" y="231" text-anchor="middle" fill="#993C1D">routes items</text>
+
+<rect x="86" y="258" width="170" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="171" y="281" text-anchor="middle" fill="#633806">driver</text>
+<text class="ts" x="171" y="298" text-anchor="middle" fill="#854F0B">drives DUT pins</text>
+
+<rect x="274" y="258" width="170" height="52" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="359" y="281" text-anchor="middle" fill="#633806">monitor</text>
+<text class="ts" x="359" y="298" text-anchor="middle" fill="#854F0B">watches, broadcasts</text>
+
+<rect x="68" y="348" width="185" height="72" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="th" x="160" y="373" text-anchor="middle" fill="#27500A">scoreboard</text>
+<text class="ts" x="160" y="391" text-anchor="middle" fill="#3B6D11">golden model check</text>
+<text class="ts" x="160" y="407" text-anchor="middle" fill="#3B6D11">PASS=5004 FAIL=0</text>
+
+<rect x="277" y="348" width="185" height="72" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="th" x="369" y="373" text-anchor="middle" fill="#27500A">coverage</text>
+<text class="ts" x="369" y="391" text-anchor="middle" fill="#3B6D11">samples covergroups</text>
+<text class="ts" x="369" y="407" text-anchor="middle" fill="#3B6D11">97.6%</text>
+
+<rect x="516" y="240" width="112" height="70" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
+<text class="th" x="572" y="268" text-anchor="middle" fill="#72243E">alu_if</text>
+<text class="ts" x="572" y="286" text-anchor="middle" fill="#993556">virtual</text>
+<text class="ts" x="572" y="302" text-anchor="middle" fill="#993556">interface</text>
+
+<rect x="516" y="120" width="112" height="70" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text class="th" x="572" y="148" text-anchor="middle" fill="#791F1F">ALU DUT</text>
+<text class="ts" x="572" y="168" text-anchor="middle" fill="#A32D2D">design under</text>
+<text class="ts" x="572" y="184" text-anchor="middle" fill="#A32D2D">test</text>
+
+<line x1="256" y1="217" x2="272" y2="217" class="arr" marker-end="url(#arrow)"/>
+<line x1="359" y1="242" x2="359" y2="256" class="arr" marker-end="url(#arrow)"/>
+<line x1="171" y1="242" x2="171" y2="256" class="arr" marker-end="url(#arrow)"/>
+
+<path d="M256 284 L490 284 L490 275 L514 275" class="arr" marker-end="url(#arrow)"/>
+<path d="M516 258 L470 258 L470 284 L446 284" class="arr" marker-end="url(#arrow)"/>
+<line x1="572" y1="238" x2="572" y2="192" class="arr" marker-end="url(#arrow)"/>
+<line x1="558" y1="192" x2="558" y2="238" class="arr" marker-end="url(#arrow)"/>
+
+<line x1="171" y1="310" x2="171" y2="346" class="arr" marker-end="url(#arrow)"/>
+<line x1="369" y1="310" x2="369" y2="346" class="arr" marker-end="url(#arrow)"/>
+
+<text class="ts" x="572" y="360" text-anchor="middle">config_db</text>
+<text class="ts" x="572" y="378" text-anchor="middle">shares alu_if</text>
+
+<text class="ts" x="572" y="434" text-anchor="middle">5004 PASS · 0 FAIL</text>
+<text class="ts" x="572" y="452" text-anchor="middle">97.6% cov</text>
+</svg>
