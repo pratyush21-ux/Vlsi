@@ -28,6 +28,11 @@ Pc_Plus_4 pc_plus_4_inst(
     .Pc(PC),
     .PCPlus4(PCPlus4)
 );
+Pc_Target pc_target_inst(
+    .Pc(PC),
+    .ImmExt(ImmExt),
+    .PcTarget(PCTarget)
+);
 PC_Mux pc_mux_inst(
     .PC_Target(PCTarget),
     .PC_Plus_4(PCPlus4),
