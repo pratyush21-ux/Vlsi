@@ -1,46 +1,77 @@
-module Control_unit(
-    input [6:0]op,
-    input [2:0]funct3,
-    input funct7b5,
-    input zero,
-    output [1:0]ResultSrc,
-    output ALUSrc,
-    output PcSrc,
-    output RegWrite,
-    output MemWrite,
-    output Jump,
-    output [1:0]ImmSrc,
-    output [3:0]ALUControl
+module Core_Datapath(
+    input clk,
+    input reset,
+    input [1:0] ResultSrc,
+    input ALUSrc,
+    input PcSrc,
+    input RegWrite,
+    input [1:0]ImmSrc,
+    input [3:0] ALUControl,
+    input [31:0] ReadData,
+    input [31:0] Instr,
+    output Zero,
+    output [31:0] ALUResult,
+    output [31:0] PC,
+    output [31:0] WriteData
 );
-wire [1:0]ALUOp;
-wire Branch;
-Main_Decoder main_decoder(
-    .op(op),
-    .RegWrite(RegWrite),
+wire [31:0] PCNext, PCPlus4, PCTarget;
+wire [31:0] ImmExt;
+wire [31:0] SrcA,SrcB;
+wire [31:0] Result;
+PC pc_inst(
+    .PCNext(PCNext),
+    .reset(reset),
+    .clk(clk),
+    .Pc(PC)
+);
+Pc_Plus_4 pc_plus_4_inst(
+    .Pc(PC),
+    .PCPlus4(PCPlus4)
+);
+Pc_Target pc_target_inst(
+    .Pc(PC),
+    .ImmExt(ImmExt),
+    .PcTarget(PCTarget)
+);
+PC_Mux pc_mux_inst(
+    .PC_Target(PCTarget),
+    .PC_Plus_4(PCPlus4),
+    .PC_Next(PCNext),
+    .PCSrc(PcSrc)
+);
+REG_MEM_BLOCK reg_mem_block_inst(
+    .clk(clk),
+    .we3(RegWrite),
+    .ra1(Instr[19:15]),    
+    .ra2(Instr[24:20]), 
+    .ra3(Instr[11:7]),      
+    .wd3(Result),   
+    .rd1(SrcA),   
+    .rd2(WriteData)    
+);
+Extend extend_inst(
+    .Instr(Instr[31:7]),
     .ImmSrc(ImmSrc),
+    .ImmExt(ImmExt)
+);
+ALU_Mux alu_mux_inst(
+    .WD(WriteData),
+    .ImmExt(ImmExt),
     .ALUSrc(ALUSrc),
-    .MemWrite(MemWrite),
+    .B(SrcB)
+);
+ALU alu_inst(
+    .A(SrcA),
+    .B(SrcB),
+    .con(ALUControl),
+    .zero(Zero),
+    .res(ALUResult)
+);
+Result_Mux result_mux_inst(
+    .ALUResult(ALUResult),
+    .ReadData(ReadData),
+    .Pc_Plus_4(PCPlus4),
     .ResultSrc(ResultSrc),
-    .Branch(Branch),
-    .ALUop(ALUOp),
-    .Jump(Jump)
+    .Result(Result)
 );
-ALUDecoder alu_decoder(
-    .opb5(op[5]),
-    .funct3(funct3),
-    .funct7b5(funct7b5),
-    .ALUOp(ALUOp),
-    .ALUControl(ALUControl)
-);
-reg branch_cond;
-
-always @(*) begin
-    case (funct3)
-        3'b000: branch_cond = zero;        // BEQ
-        3'b001: branch_cond = ~zero;       // BNE
-        default: branch_cond = zero;
-    endcase
-end
-
-assign PcSrc = (Branch & branch_cond) | Jump;
 endmodule
