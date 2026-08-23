@@ -32,5 +32,15 @@ ALUDecoder alu_decoder(
     .ALUOp(ALUOp),
     .ALUControl(ALUControl)
 );
-assign PcSrc = Branch & zero| Jump;
+reg branch_cond;
+
+always @(*) begin
+    case (funct3)
+        3'b000: branch_cond = zero;        // BEQ
+        3'b001: branch_cond = ~zero;       // BNE
+        default: branch_cond = zero;
+    endcase
+end
+
+assign PcSrc = (Branch & branch_cond) | Jump;
 endmodule
