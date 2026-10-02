@@ -13,14 +13,18 @@ I am looking for a **VLSI Design / Verification Engineer** role (internships and
 ```
 .
 |-- RTL/
-|   |-- Processors/     RISCV_Single_Cycle, RISCV_Pipelined
+|   |-- Processors/     RISCV_Single_Cycle, RISCV_Pipelined, DSP_Core*, Zero_Riscy*
+|   |-- Arithmetic/     DAVIC*, Fixed_Weight_DA_MAC*, RIDGE_Approx_DA_MAC*, Booth_Multipliers*
+|   |-- Datapath/       Mini_CPU*, FFT_Butterfly*, Tri_State_Bus*
 |   |-- Protocols/      UART
 |   |-- FSM/            Door_Lock_FSM, Traffic_Light_Controller, Washing_Machine
 |   |-- DSP/            FIR_Filter
 |   `-- Internship/     basic digital design blocks and testbenches
-|-- UVM/                UVM verification projects (FW_ALU, FW_decoder)
-`-- SV/                 SystemVerilog verification projects (FIFO_verification)
+|-- UVM/                FW_ALU, FW_FIFO*, FW_Zeroriscy_ALU*, FW_decoder
+`-- SV/                 FIFO_verification, ALU_verification*, Decoder_verification*
 ```
+
+\* Description-only project: results and architecture are documented here, the source code is **available on request** (see [Source code on request](#source-code-on-request)).
 
 ## What is in this repository
 
@@ -46,9 +50,30 @@ Each folder has its own README with details and simulation steps.
 - **RISC-V cores:** single-cycle and 5-stage pipelined implementations written in Verilog.
 - **Protocol and control designs:** UART, FIR filter and several FSM-based controllers.
 
+## Featured research and accelerator projects (code on request)
+
+These projects are documented with architecture and measured results. The source code is not published here.
+
+| Project | Highlight |
+|---|---|
+| [DAVIC](RTL/Arithmetic/DAVIC) | Distributed-arithmetic inner-product engine: **9x fewer LUTs, 5.8x lower power**, 37K um2 in Sky130 |
+| [Fixed-Weight DA MAC](RTL/Arithmetic/Fixed_Weight_DA_MAC) | Multiplier-free 100-tap MAC on Zynq-7010 (Red Pitaya), AXI-Stream and DMA, 125 MHz |
+| [RIDGE approximate DA MAC](RTL/Arithmetic/RIDGE_Approx_DA_MAC) | Runtime precision plus approximate adder tree, SNR versus cycles design space |
+| [Booth multipliers](RTL/Arithmetic/Booth_Multipliers) | Hybrid radix-4/8 approximate Booth: **58 percent lower PDP, 60 percent smaller area** |
+| [Custom DSP core](RTL/Processors/DSP_Core) | 16-bit DSP processor with MAC, saturation and FFT butterfly |
+| [Zero-Riscy integration](RTL/Processors/Zero_Riscy) | PULP RISC-V core integration and interface simulation |
+| [UVM Zero-Riscy ALU](UVM/FW_Zeroriscy_ALU) | 100 percent functional and code coverage, 0 mismatches |
+| [UVM FIFO](UVM/FW_FIFO) | 100 percent functional, code and assertion coverage |
+| [SV ALU framework](SV/ALU_verification) | 100 percent covergroup, 100 percent toggle coverage |
+| [Datapath blocks](RTL/Datapath) | Mini CPU, FFT butterfly, tri-state bus |
+
+## Source code on request
+
+Projects marked with an asterisk, and the UVM sources, are kept private while related manuscripts are under review. If you are a recruiter, researcher or student and would like the code, please email **Pratyush Kumar Sahu** at [sahukumarpratyush2004@gmail.com](mailto:sahukumarpratyush2004@gmail.com?subject=Code%20request) with the project name and your purpose.
+
 ## Other work (not in this repository)
 
-- **Distributed-Arithmetic MAC accelerator on Xilinx Zynq-7010:** multiplier-free 100-tap signed MAC using distributed arithmetic, interfaced to an ARM processor through a memory-mapped register bus and a 125 MHz ADC; closed timing at 125 MHz with no DSP blocks used.
+- **Distributed-Arithmetic MAC accelerator on Xilinx Zynq-7010** (documented above): multiplier-free 100-tap signed MAC using distributed arithmetic, interfaced to an ARM processor through a memory-mapped register bus and a 125 MHz ADC; closed timing at 125 MHz with no DSP blocks used.
 - **DAVIC, a distributed-arithmetic vector inner-product engine:** folded, pipelined architecture that reduced FPGA LUTs by 9x and on-chip power by 5.8x versus a parallel baseline.
 - **Hybrid Radix-4/8 Booth multiplier for energy-efficient edge AI:** 58 percent lower power-delay product and 60 percent smaller area than baselines, validated on a Basys-3 FPGA with Vivado ILA.
 - **Zero-Riscy (PULP) core integration:** simulation of instruction and data interfaces.
