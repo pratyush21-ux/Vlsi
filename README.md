@@ -24,9 +24,11 @@ I am looking for a **VLSI Design / Verification Engineer** role (internships and
 
 ## What is in this repository
 
+Each folder has its own README with details and simulation steps.
+
 | Folder | What it contains | Language / tools |
 |---|---|---|
-| [`RTL/Internship/`](RTL/Internship) | About 55 Verilog designs with testbenches from my digital design internship: adders, ALUs, multiplexer, decoder, encoder, magnitude comparator, latches, flip-flops, counters, clock divider, ROM and data memory, Mealy and Moore sequence detectors | Verilog, Icarus Verilog, GTKWave |
+| [`RTL/Internship/`](RTL/Internship) | About 55 Verilog files (designs and testbenches) from my digital design internship: adders, ALUs, multiplexer, decoder, encoder, magnitude comparator, latches, flip-flops, counters, clock divider, digital clock, ROM and data memory, Moore FSM | Verilog, Icarus Verilog, GTKWave |
 | [`RTL/Processors/RISCV_Single_Cycle/`](RTL/Processors/RISCV_Single_Cycle) | Single-cycle RISC-V core: ALU, ALU decoder, main decoder, control unit, datapath, register file, instruction and data memory, sign extend, PC logic, seven-segment output wrapper and a testbench | Verilog |
 | [`RTL/Processors/RISCV_Pipelined/`](RTL/Processors/RISCV_Pipelined) | 5-stage pipelined RISC-V core with separate fetch, decode, execute, memory and write-back stages and a hazard unit | Verilog |
 | [`RTL/Protocols/UART/`](RTL/Protocols/UART) | UART transmitter, receiver, baud-rate generator, top module and testbench | Verilog |
