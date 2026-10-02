@@ -1,0 +1,92 @@
+RUN.PY COMMANDS (simple)
+=======================
+
+python run.py
+    Compile everything, open Questa GUI, run random test with coverage.
+
+python run.py --test random
+    Same as above (random is default).
+
+python run.py --test write
+    Run test with only writes.
+
+python run.py --test read
+    Run test: write 10 items, then read 10 items.
+
+python run.py --test order
+    Run test: check FIFO order and pointer wraparound.
+
+python run.py --test empty
+    Run test: read from empty FIFO (underflow check).
+
+python run.py --test full
+    Run test: write 32 items (full flag check).
+
+python run.py --test overflow
+    Run test: write 32 items + 5 extra writes (overflow check).
+
+python run.py --num_txn 500
+    Set number of transactions to 500 (default is 200).
+    Works for random and write tests. Other tests have fixed sizes.
+
+python run.py --test random --num_txn 1000
+    Combine: random test with 1000 transactions.
+
+python run.py --clean
+    Delete work folder, transcript, waveform, coverage file.
+
+
+COMMANDS INSIDE THE SCRIPT (what it runs for you)
+=================================================
+
+vlib work
+    Make the work library folder.
+
+vlog -work work +cover=bcefst Fifo_rtl.v
+    Compile the FIFO design (Verilog) with code coverage on.
+
+vlog -sv -work work +incdir+. +cover=bcefst FIFO_INTERFACE.sv FIFO_ASSERTIONS.sv FIFO_TOP.sv
+    Compile the testbench (SystemVerilog) with code coverage on.
+    -sv        = SystemVerilog mode
+    +incdir+.  = find `include files in this folder
+
+vsim -coverage -voptargs=+acc -onfinish stop work.FIFO_TOP +TESTNAME=random +NUMTXN=200
+    Open Questa GUI and start simulation.
+    +NUMTXN=200      = number of transactions
+    -coverage        = collect coverage
+    -voptargs=+acc   = keep all signals visible in waves
+    -onfinish stop   = do not close GUI when simulation ends
+    work.FIFO_TOP    = top module
+    +TESTNAME=random = which test to run
+
+add wave -r /*
+    Put all signals in the wave window.
+
+run -all
+    Run simulation until it finishes.
+
+coverage save fifo_cov.ucdb
+    Save coverage results to a file.
+
+wave zoom full
+    Fit the waveform to the window.
+
+
+AFTER RUN (optional, type in terminal)
+======================================
+
+vcover report -details fifo_cov.ucdb
+    Print coverage report as text.
+
+vcover report -html -output covhtmlreport fifo_cov.ucdb
+    Make HTML coverage report in folder covhtmlreport.
+
+vcover merge all.ucdb a.ucdb b.ucdb
+    Merge coverage from different tests into one.
+
+
+FIRST CHECK
+===========
+
+vlog -version
+    If this prints a version, Questa is in PATH and script will work.
