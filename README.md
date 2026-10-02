@@ -8,25 +8,39 @@ I am looking for a **VLSI Design / Verification Engineer** role (internships and
 
 ---
 
+## Repository layout
+
+```
+.
+|-- RTL/
+|   |-- Processors/     RISCV_Single_Cycle, RISCV_Pipelined
+|   |-- Protocols/      UART
+|   |-- FSM/            Door_Lock_FSM, Traffic_Light_Controller, Washing_Machine
+|   |-- DSP/            FIR_Filter
+|   `-- Internship/     basic digital design blocks and testbenches
+|-- UVM/                UVM verification projects (FW_ALU, FW_decoder)
+`-- SV/                 SystemVerilog verification projects (FIFO_verification)
+```
+
 ## What is in this repository
 
 | Folder | What it contains | Language / tools |
 |---|---|---|
-| [`Internship/`](Internship) | About 55 Verilog designs with testbenches from my digital design internship: adders, ALUs, multiplexer, decoder, encoder, magnitude comparator, latches, flip-flops, counters, clock divider, ROM and data memory, Mealy and Moore sequence detectors | Verilog, Icarus Verilog, GTKWave |
-| [`RISCV_Single_Cycle/`](RISCV_Single_Cycle) | Single-cycle RISC-V core: ALU, ALU decoder, main decoder, control unit, datapath, register file, instruction and data memory, sign extend, PC logic, seven-segment output wrapper and a testbench | Verilog |
-| [`RISCV_Pipelined/`](RISCV_Pipelined) | 5-stage pipelined RISC-V core with separate fetch, decode, execute, memory and write-back stages and a hazard unit | Verilog |
-| [`UART/`](UART) | UART transmitter, receiver, baud-rate generator, top module and testbench | Verilog |
-| [`FIR_Filter/`](FIR_Filter) | FIR filter design with testbench and waveform dump | Verilog |
-| [`Door_Lock_FSM/`](Door_Lock_FSM) | Door lock system: FSM controller, password checker, top module, testbench and design document | Verilog |
-| [`Traffic_Light_Controller/`](Traffic_Light_Controller) | FSM-based traffic light controller with clock divider and testbench | Verilog |
-| [`Washing_Machine/`](Washing_Machine) | FSM-based washing machine controller with testbench | Verilog |
-| [`SV_FRAME_WORK/FIFO_verification/`](SV_FRAME_WORK/FIFO_verification) | Class-based SystemVerilog testbench for a 32 x 8 synchronous FIFO: generator, driver, monitor, scoreboard, SVA assertions, functional coverage, 7 tests, run in QuestaSim | SystemVerilog, SVA, QuestaSim |
-| [`UVM_FRAME_WORK/`](UVM_FRAME_WORK) | UVM verification environment for a 32-bit RISC-V style ALU: sequence, driver, monitor, agent, scoreboard, coverage. Results and architecture are documented in the folder README (source code kept private) | SystemVerilog, UVM, QuestaSim |
+| [`RTL/Internship/`](RTL/Internship) | About 55 Verilog designs with testbenches from my digital design internship: adders, ALUs, multiplexer, decoder, encoder, magnitude comparator, latches, flip-flops, counters, clock divider, ROM and data memory, Mealy and Moore sequence detectors | Verilog, Icarus Verilog, GTKWave |
+| [`RTL/Processors/RISCV_Single_Cycle/`](RTL/Processors/RISCV_Single_Cycle) | Single-cycle RISC-V core: ALU, ALU decoder, main decoder, control unit, datapath, register file, instruction and data memory, sign extend, PC logic, seven-segment output wrapper and a testbench | Verilog |
+| [`RTL/Processors/RISCV_Pipelined/`](RTL/Processors/RISCV_Pipelined) | 5-stage pipelined RISC-V core with separate fetch, decode, execute, memory and write-back stages and a hazard unit | Verilog |
+| [`RTL/Protocols/UART/`](RTL/Protocols/UART) | UART transmitter, receiver, baud-rate generator, top module and testbench | Verilog |
+| [`RTL/DSP/FIR_Filter/`](RTL/DSP/FIR_Filter) | FIR filter design with testbench and waveform dump | Verilog |
+| [`RTL/FSM/Door_Lock_FSM/`](RTL/FSM/Door_Lock_FSM) | Door lock system: FSM controller, password checker, top module, testbench and design document | Verilog |
+| [`RTL/FSM/Traffic_Light_Controller/`](RTL/FSM/Traffic_Light_Controller) | FSM-based traffic light controller with clock divider and testbench | Verilog |
+| [`RTL/FSM/Washing_Machine/`](RTL/FSM/Washing_Machine) | FSM-based washing machine controller with testbench | Verilog |
+| [`SV/FIFO_verification/`](SV/FIFO_verification) | Class-based SystemVerilog testbench for a 32 x 8 synchronous FIFO: generator, driver, monitor, scoreboard, SVA assertions, functional coverage, 7 tests, run in QuestaSim | SystemVerilog, SVA, QuestaSim |
+| [`UVM/`](UVM) | UVM verification environment for a 32-bit RISC-V style ALU: sequence, driver, monitor, agent, scoreboard, coverage. Results and architecture are documented in the folder README (source code kept private) | SystemVerilog, UVM, QuestaSim |
 
 ## Highlights
 
-- **UVM ALU verification:** complete UVM testbench with a golden-reference scoreboard, 70,000+ constrained-random transactions, 100 percent functional coverage and zero failures. See [`UVM_FRAME_WORK/FW_ALU`](UVM_FRAME_WORK/FW_ALU).
-- **SystemVerilog FIFO verification:** layered testbench with assertions, functional coverage and 7 directed and random tests. See [`SV_FRAME_WORK/FIFO_verification`](SV_FRAME_WORK/FIFO_verification).
+- **UVM ALU verification:** complete UVM testbench with a golden-reference scoreboard, 70,000+ constrained-random transactions, 100 percent functional coverage and zero failures. See [`UVM/FW_ALU`](UVM/FW_ALU).
+- **SystemVerilog FIFO verification:** layered testbench with assertions, functional coverage and 7 directed and random tests. See [`SV/FIFO_verification`](SV/FIFO_verification).
 - **RISC-V cores:** single-cycle and 5-stage pipelined implementations written in Verilog.
 - **Protocol and control designs:** UART, FIR filter and several FSM-based controllers.
 
