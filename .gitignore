@@ -1,0 +1,22 @@
+# Simulator outputs and build artifacts
+a.out
+*.vvp
+*_out
+work/
+transcript
+*.wlf
+modelsim.ini
+*.ucdb
+covhtmlreport/
+*.log
+*.jou
+xsim.dir/
+.Xil/
+
+# Windows download metadata
+*Zone.Identifier*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+*.swp
