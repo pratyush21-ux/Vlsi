@@ -1,0 +1,43 @@
+OpenROAD 26Q3-1621-g21512b0ab 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef, created 14 layers, 25 vias
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef at line 2.
+
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef, created 437 library cells
+
+### extracting min RC corner
+[WARNING RCX-0514] The ext_model_file option is deprecated. Use set_extraction_rules_file command instead.
+[INFO RCX-0435] Reading extraction model file /foss/pdks/sky130A/libs.tech/librelane/rules.openrcx.sky130A.min.calibre ...
+[INFO RCX-0434] Defined process_corner MinMax0 with ext_model_index 0 (using extRulesFile defaults)
+[INFO RCX-0436] RC segment generation simple_cpu_v4 (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 5863 rc segments
+[INFO RCX-0439] Coupling Cap extraction simple_cpu_v4 ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 55% of 11964 wires extracted
+[INFO RCX-0442] 100% of 11964 wires extracted
+[INFO RCX-0045] Extract 1517 nets, 7380 rsegs, 7380 caps, 12686 ccs
+[INFO RCX-0443] 1517 nets finished
+
+### extracting nom RC corner
+[WARNING RCX-0514] The ext_model_file option is deprecated. Use set_extraction_rules_file command instead.
+[INFO RCX-0435] Reading extraction model file /foss/pdks/sky130A/libs.tech/librelane/rules.openrcx.sky130A.nom.calibre ...
+[INFO RCX-0436] RC segment generation simple_cpu_v4 (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 6014 rc segments
+[INFO RCX-0439] Coupling Cap extraction simple_cpu_v4 ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0045] Extract 1517 nets, 7531 rsegs, 7531 caps, 12741 ccs
+[INFO RCX-0443] 1517 nets finished
+
+### extracting max RC corner
+[WARNING RCX-0514] The ext_model_file option is deprecated. Use set_extraction_rules_file command instead.
+[INFO RCX-0435] Reading extraction model file /foss/pdks/sky130A/libs.tech/librelane/rules.openrcx.sky130A.max.calibre ...
+[INFO RCX-0436] RC segment generation simple_cpu_v4 (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 6306 rc segments
+[INFO RCX-0439] Coupling Cap extraction simple_cpu_v4 ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0045] Extract 1517 nets, 7823 rsegs, 7823 caps, 12852 ccs
+[INFO RCX-0443] 1517 nets finished

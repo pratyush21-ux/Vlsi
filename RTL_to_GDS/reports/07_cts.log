@@ -1,0 +1,239 @@
+OpenROAD 26Q3-1621-g21512b0ab 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef, created 14 layers, 25 vias
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef at line 2.
+
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef, created 437 library cells
+[INFO CTS-0050] Root buffer is sky130_fd_sc_hd__clkbuf_16.
+[INFO CTS-0051] Sink buffer is sky130_fd_sc_hd__clkbuf_8.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    sky130_fd_sc_hd__clkbuf_2
+                    sky130_fd_sc_hd__clkbuf_4
+                    sky130_fd_sc_hd__clkbuf_8
+[INFO CTS-0049] Characterization buffer is sky130_fd_sc_hd__clkbuf_8.
+[INFO CTS-0007] Net "clk" found for clock "clk".
+[INFO CTS-0010]  Clock net "clk" has 322 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 3 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 322.
+[INFO CTS-0029]  Register sinks will be clustered in groups of up to 10 and with maximum cluster diameter of 50.0 um.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 13600  dbu (13 um).
+[INFO CTS-0204] A clustering solution was found from clustering size of 10 and clustering diameter of 50.
+[INFO CTS-0205] Better solution may be possible if either -sink_clustering_size, -sink_clustering_max_diameter, or both options are omitted to enable automatic clustering.
+[INFO CTS-0019]  Total number of sinks after clustering: 39.
+[INFO CTS-0024]  Normalized sink region: [(1.81246, 2.53039), (14.2679, 14.8522)].
+[INFO CTS-0025]     Width:  12.4554.
+[INFO CTS-0026]     Height: 12.3218.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 20
+    Sub-region size: 6.2277 X 12.3218
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 10
+    Sub-region size: 6.2277 X 6.1609
+[INFO CTS-0034]     Segment length (rounded): 4.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 5
+    Sub-region size: 3.1139 X 6.1609
+[INFO CTS-0034]     Segment length (rounded): 1.
+[INFO CTS-0038]  Stop criterion found. Sink region hpwl is smaller than max wirelength (4534.740 um) and max number of sinks is 10.
+[INFO CTS-0035]  Number of sinks covered: 39.
+[INFO CTS-0018]     Created 48 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 3.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 3.
+[INFO CTS-0015]     Created 48 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 3:1, 4:2, 5:11, 6:2, 7:5, 8:3, 9:6, 10:17..
+[INFO CTS-0017]     Max level of the clock tree: 3.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 345
+[INFO CTS-0100]  Leaf buffers 39
+[INFO CTS-0101]  Average sink wire length 335.29 um
+[INFO CTS-0102]  Path depth 2 - 3
+[INFO CTS-0207]  Dummy loads inserted 23
+[INFO CTS-0500] Runtime: 6.91s
+[INFO RSZ-0058] Using max wire length 4535um.
+[INFO DPL-0006] Core area: 38647.07 um^2
+[INFO DPL-0007] Movable instances area: 17676.95 um^2
+[INFO DPL-0008] Fixed instances area within core: 1234.93 um^2
+[INFO DPL-0009] Utilization: 48.9%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 2148 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         12 |         2 |        10
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 0.02s
+Placement Analysis
+---------------------------------
+total displacement       1522.8 u
+average displacement        0.7 u
+max displacement           15.4 u
+original HPWL           37121.1 u
+legalized HPWL          37858.9 u
+delta HPWL                    2 %
+
+
+================ CLOCK TREE ================
+Total number of Clock Roots: 1.
+Total number of Buffers Inserted: 48.
+Total number of Clock Subnets: 48.
+Total number of Sinks: 322.
+Cells used:
+  sky130_fd_sc_hd__clkbuf_8: 39
+  sky130_fd_sc_hd__clkbuf_16: 9
+Dummys used:
+  sky130_fd_sc_hd__bufinv_16: 2
+  sky130_fd_sc_hd__clkbuf_4: 6
+  sky130_fd_sc_hd__clkbuf_8: 1
+  sky130_fd_sc_hd__clkinv_1: 3
+  sky130_fd_sc_hd__clkinv_2: 4
+  sky130_fd_sc_hd__clkinv_4: 1
+  sky130_fd_sc_hd__clkinvlp_2: 1
+  sky130_fd_sc_hd__clkinvlp_4: 4
+  sky130_fd_sc_hd__inv_6: 1
+Clock clk
+   0.82 source latency _1874_/CLK ^
+  -0.80 target latency _1969_/CLK ^
+   0.25 clock uncertainty
+   0.00 CRPR
+--------------
+   0.27 setup skew
+
+
+================ AFTER CTS (before timing repair) ================
+  corner ss  setup WNS    4.951 ns   hold WNS    0.620 ns
+  corner tt  setup WNS   12.906 ns   hold WNS    0.164 ns
+  corner ff  setup WNS   14.365 ns   hold WNS    0.004 ns
+tns max 0.00
+max slew
+
+Pin                                    Limit    Slew   Slack
+------------------------------------------------------------
+_1405_/B                                0.75    0.60    0.15 (MET)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+_0837_/Y                                 10     10      0 (MET)
+
+max capacitance
+
+Pin                                    Limit     Cap   Slack
+------------------------------------------------------------
+_1472_/Y                                0.01    0.00    0.01 (MET)
+
+Design area 18371 um^2 48% utilization.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0505] Runtime: 0.08s
+[INFO RSZ-0046] Found 76 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |   0.004 |   0.000 | _1913_/D
+    final |       0 |      73 |            0 |    +4.0% |   0.101 |   0.000 | _1946_/D
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 73 hold buffers.
+[INFO RSZ-0506] Runtime: 0.24s
+[INFO DPL-0006] Core area: 38647.07 um^2
+[INFO DPL-0007] Movable instances area: 18407.65 um^2
+[INFO DPL-0008] Fixed instances area within core: 1234.93 um^2
+[INFO DPL-0009] Utilization: 50.8%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 2221 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |          6 |         2 |         4
+        1 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 1.
+[INFO DPL-0500] Runtime: 0.01s
+Placement Analysis
+---------------------------------
+total displacement        361.1 u
+average displacement        0.2 u
+max displacement           11.3 u
+original HPWL           38289.1 u
+legalized HPWL          38635.7 u
+delta HPWL                    1 %
+
+
+================ AFTER CTS + TIMING REPAIR ================
+  corner ss  setup WNS    4.951 ns   hold WNS    0.812 ns
+  corner tt  setup WNS   12.906 ns   hold WNS    0.297 ns
+  corner ff  setup WNS   14.365 ns   hold WNS    0.100 ns
+tns max 0.00
+max slew
+
+Pin                                    Limit    Slew   Slack
+------------------------------------------------------------
+_1405_/B                                0.75    0.60    0.15 (MET)
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+_0837_/Y                                 10     10      0 (MET)
+
+max capacitance
+
+Pin                                    Limit     Cap   Slack
+------------------------------------------------------------
+_1472_/Y                                0.01    0.00    0.01 (MET)
+
+Design area 19102 um^2 49% utilization.
+Startpoint: _1946_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _1946_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+Corner: ff
+
+   Delay     Time   Description
+-----------------------------------------------------------
+   0.000    0.000   clock clk (rise edge)
+   0.323    0.323   clock network delay (propagated)
+   0.000    0.323 ^ _1946_/CLK (sky130_fd_sc_hd__dfxtp_1)
+   0.222    0.545 v _1946_/Q (sky130_fd_sc_hd__dfxtp_1)
+   0.071    0.616 ^ _1503_/Y (sky130_fd_sc_hd__mux2i_1)
+   0.022    0.638 v _1504_/Y (sky130_fd_sc_hd__nor2_1)
+   0.000    0.638 v _1946_/D (sky130_fd_sc_hd__dfxtp_1)
+            0.638   data arrival time
+
+   0.000    0.000   clock clk (rise edge)
+   0.323    0.323   clock network delay (propagated)
+   0.250    0.573   clock uncertainty
+   0.000    0.573   clock reconvergence pessimism
+            0.573 ^ _1946_/CLK (sky130_fd_sc_hd__dfxtp_1)
+  -0.036    0.537   library hold time
+            0.537   data required time
+-----------------------------------------------------------
+            0.537   data required time
+           -0.638   data arrival time
+-----------------------------------------------------------
+            0.100   slack (MET)
+
+

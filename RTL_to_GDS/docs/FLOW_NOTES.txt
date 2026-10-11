@@ -1,0 +1,569 @@
+=====================================================================
+  RTL -> GDS  of  SimpleCPU v4 (5-stage pipelined, 16-bit)
+  MANUAL step-by-step flow, every tool run by hand inside Docker
+  PDK  : SkyWater SKY130A, std-cell lib sky130_fd_sc_hd
+=====================================================================
+
+TOOLS (all inside Docker image hpretl/iic-osic-tools:latest)
+  iverilog / vvp ....... RTL simulation
+  Yosys ................ logic synthesis (RTL -> gate netlist)
+  OpenSTA (sta) ........ static timing analysis
+  OpenROAD ............. floorplan, PDN, placement, CTS, routing, RC extract
+  Magic ................ DEF -> GDS, DRC, layout extraction for LVS
+  Netgen ............... LVS (layout vs schematic)
+  KLayout .............. view the GDS
+
+FLOW (one script per step, folder flow\)
+  01 RTL simulation ............ flow\01_sim.sh         (iverilog)
+  02 Synthesis ................. flow\02_synth.tcl      (yosys)
+  03 Pre-layout STA ............ flow\03_sta_synth.tcl  (OpenSTA)
+  04 Floorplan ................. flow\04_floorplan.tcl  (openroad)
+  05 Power grid (PDN) .......... flow\05_pdn.tcl        (openroad)
+  06 Placement ................. flow\06_place.tcl      (openroad)
+  07 Clock tree synthesis ...... flow\07_cts.tcl        (openroad)
+  08 Routing ................... flow\08_route.tcl      (openroad)
+  09 RC extraction + sign-off STA  flow\09_sta_signoff  (openroad + OpenSTA)
+  10 GDS stream-out ............ flow\10_gds.tcl        (magic)
+  11 DRC ....................... flow\11_drc.tcl        (magic)
+  12 LVS ....................... flow\12_lvs.sh         (magic + netgen)
+
+PROJECT FOLDER : C:\Users\LENOVO\eda\designs\Simplecpu4
+  RTL\Simplecpu.v ............ the CPU RTL (module simple_cpu_v4)
+  tb\simple_cpu_v4_tb.v ...... testbench + memory model + test program
+  flow\env.sh ................ all PDK paths (lib, lef, gds, spice)
+  flow\constraints\*.sdc ..... timing constraints (clock 20 ns)
+  results\ ................... design database after each step
+  reports\ ................... logs / reports of each step
+
+How each step is started (from PowerShell, folder mounted into docker):
+  docker run --rm -it -v C:\Users\LENOVO\eda\designs\Simplecpu4:/foss/designs/Simplecpu4
+         -w /foss/designs/Simplecpu4 hpretl/iic-osic-tools:latest --skip bash flow/<step>.sh
+
+---------------------------------------------------------------------
+STEP 0 : DESIGN SPEC (what we are building)
+---------------------------------------------------------------------
+  * 16-bit data, 16-bit instructions, 12-bit address (4K words)
+  * 8 registers RA..RH, RH is the link register for JAL
+  * Pipeline: IF -> ID -> EX -> MA -> WB
+  * One single-port memory for code AND data (von Neumann)
+      - structural hazard: LOAD/STORE in MA stalls IF and ID
+  * RAW hazards: ID stalls until the source register is written back
+    (no forwarding)
+  * Branches resolve in EX; no fetch while a jump is in ID/EX
+  * Top-level pins: clk, rst, mem_addr[11:0], mem_rdata[15:0],
+                    mem_wdata[15:0], mem_we, dbg_pc[11:0]
+  * The memory is OUTSIDE the chip -> the GDS is only the CPU core.
+
+Timing constraints  flow\constraints\simple_cpu_v4.sdc
+  create_clock clk  period 20 ns (50 MHz), uncertainty 0.25 ns
+  input / output delay 4 ns (20 % of the period used outside the chip)
+  driving cell inv_2 on inputs, 33 fF load on outputs
+  max transition 0.75 ns, max fanout 10
+
+---------------------------------------------------------------------
+STEP 1 : RTL SIMULATION (functional verification)            [DONE]
+---------------------------------------------------------------------
+Why: prove the RTL is functionally correct before spending time on
+     synthesis / layout. Bugs are cheapest to fix here.
+
+Testbench: tb\simple_cpu_v4_tb.v
+  - 4096 x 16 memory model (async read, sync write)
+  - Test program loaded into memory:
+      sum = 10+9+...+1 with ADD reg, SUBI, JUMPNZ loop  -> 55
+      STORE 55 to M[200], clear RA, LOAD back from M[200]
+      JAL to a subroutine: RA = (RA+RA) & 0x7C = 108, JR RH back
+      STORE 108 to M[201]
+      JUMPZ over a STORE to M[202] (must be skipped)
+      JUMPU 15 spin loop = "halt"
+
+Commands (flow\01_sim.sh):
+  iverilog -g2012 -Wall -o cpu_tb.vvp RTL/Simplecpu.v tb/simple_cpu_v4_tb.v
+  vvp cpu_tb.vvp
+
+Result:
+  M[200] = 55   (expect 55)
+  M[201] = 108  (expect 108)
+  M[202] = 0    (expect 0)    -> JUMPZ skip works
+  PC     = 16   (spin loop 15<->16: fetch of 15 increments PC, the
+                 jump resolves in EX and sets it back to 15)
+  RB=55 RC=0 RH=11            -> JAL link register correct
+  TEST PASSED
+
+Waveform: sim\simple_cpu_v4_tb.vcd  (open with: gtkwave simple_cpu_v4_tb.vcd)
+
+---------------------------------------------------------------------
+STEP 2 : LOGIC SYNTHESIS  (RTL -> gate-level netlist)     [first try done]
+---------------------------------------------------------------------
+Why: turn behavioural Verilog into real standard cells of the PDK
+     (NAND, NOR, MUX, flip-flops ...) so it can be placed and routed.
+
+Script flow\02_synth.tcl  (yosys -c 02_synth.tcl)
+  read_liberty -lib <tt_025C_1v80.lib>   -> know cell pins
+  read_verilog -sv RTL/Simplecpu.v
+  synth -top simple_cpu_v4 -flatten      -> generic gates + FFs
+  dfflibmap -liberty ...                 -> map FFs to sky130 FF cells
+  abc -D 20000 -dont_use sky130_fd_sc_hd__lpflow_* -liberty ...
+                                         -> map logic to sky130 cells,
+                                            target 20000 ps = 20 ns
+  setundef / splitnets / opt_clean       -> clean netlist for OpenROAD
+  hilomap                                -> tie-hi / tie-lo cells
+  insbuf                                 -> "assign a=b" -> real buffer
+  check / stat / write_verilog           -> results\02_synth\simple_cpu_v4.v
+
+Issues found and fixed in the first try:
+  1) "Wire mem_addr[..] is used but has no driver" warnings
+     -> false alarm: Yosys did not know the sky130 cell pin directions.
+        Fix: read_liberty -lib at the start.  Now "0 problems".
+  2) ABC picked sky130_fd_sc_hd__lpflow_* cells (power-gating isolation
+     cells, not meant for normal logic).
+        Fix: abc -dont_use sky130_fd_sc_hd__lpflow_*
+
+First-try result, typical corner tt 25C 1.8V:
+  Total cells ........ 1183
+  Chip (cell) area ... 15,496 um^2
+  Sequential area .... 9,099 um^2 (58.7 %)
+  Flip-flops ......... 322  (265 edfxtp = FF with enable, 57 dfxtp)
+                       mostly the 8x16 register file + pipeline registers
+  Ports .............. 59 bits
+
+Final synthesis run (flow\02_synth.sh)                          [DONE]
+  Added the PDK dont-use list (synth_excluded.cells): clock buffers /
+  inverters, delay cells, tap/decap/fill, diode, lpflow, probe, scan FFs.
+    -> the 79 clkinv_1 became normal inv_1 (clock cells stay for CTS)
+  insbuf added 28 buf_2 for output ports that were plain "assign"s
+    -> netlist has 0 assign statements (OpenROAD needs real cells)
+  Result:  1211 cells, 15,636 um^2, 322 FFs, 0 problems
+  Netlist: results\02_synth\simple_cpu_v4.v
+  Report : reports\02_synth_stat.rpt , log reports\02_synth.log
+
+---------------------------------------------------------------------
+STEP 3 : PRE-LAYOUT STA with OpenSTA                           [DONE]
+---------------------------------------------------------------------
+Why: check that the gate netlist can meet 50 MHz BEFORE layout.
+     No wires yet -> ideal clock, only cell delays + pin caps.
+
+Script flow\03_sta_synth.tcl   (sta -no_init -exit 03_sta_synth.tcl)
+  read_liberty  tt_025C_1v80.lib
+  read_verilog  results/02_synth/simple_cpu_v4.v
+  link_design   simple_cpu_v4
+  read_sdc      flow/constraints/simple_cpu_v4.sdc
+  report_checks -path_delay max / min      (worst setup / hold path)
+  report_wns / report_tns / report_worst_slack
+  report_check_types -max_slew -max_capacitance -max_fanout -violators
+  report_power
+
+Result (reports\03_sta_synth.rpt):
+  Setup worst slack  +12.49 ns   MET
+    worst path: rst (input, 4 ns ext delay) -> inv -> nand4 ->
+                inv_1 driving 81 pins (slew 2.2 ns!) -> nand4b -> o211ai
+                -> FF D pin.  arrival 7.18 ns, required 19.66 ns
+  Hold  worst slack  +0.18 ns    MET
+  WNS / TNS          0 / 0
+  Power (ideal)      0.99 mW  (82 % in flip-flops, clock tree not yet built)
+  Design-rule violations: 581 max-slew, 37 max-fanout, 10 max-cap
+    e.g. rst fanout 110, one inverter fanout 81
+    -> EXPECTED before layout: synthesis does not buffer big nets.
+       OpenROAD repair_design will fix them during placement (step 06).
+
+---------------------------------------------------------------------
+COMMON OpenROAD SETUP  flow\or_common.tcl  (sourced by steps 04-09)
+---------------------------------------------------------------------
+  read_lef  sky130_fd_sc_hd__nom.tlef   technology: layers, vias, rules
+  read_lef  sky130_fd_sc_hd.lef         cell outlines + pin shapes
+  define_corners ss tt ff               3 PVT corners
+  read_liberty -corner ss/tt/ff         slow 100C 1.6V / typ / fast -40C 1.95V
+  set_dont_use lpflow_* probe*          PDK pnr_excluded.cells
+  set_wire_rc -signal met2 / -clock met5  wire RC estimate before extraction
+  Each step:  read_db results/<previous>.odb  +  read_sdc
+  Started with:  bash flow/run_or.sh <step>   (= openroad -exit <step>.tcl)
+
+---------------------------------------------------------------------
+STEP 4 : FLOORPLAN  (OpenROAD)                                 [DONE]
+---------------------------------------------------------------------
+Why: decide the chip size, create the rows where cells will sit, the
+     routing tracks, and the well-tap cells.
+
+Script flow\04_floorplan.tcl
+  read_verilog results/02_synth/simple_cpu_v4.v ; link_design ; read_sdc
+  initialize_floorplan -utilization 40 -aspect_ratio 1.0 -core_space 15 -site unithd
+      40 % of the core filled with cells, square, 15 um margin for the
+      power ring. "unithd" = sky130 HD site, 0.46 x 2.72 um
+  make_tracks li1..met5  (offset / pitch from PDK tracks.info)
+  tapcell -distance 13 -tapcell_master tapvpwrvgnd_1 -endcap_master decap_3
+      tap cells tie n-well to VPWR and substrate to VGND (prevents latch-up)
+
+Result (reports\04_floorplan.log):
+  Die  .......... 227.72 x 227.72 um   (0.052 mm^2)
+  Core .......... 197.34 x 195.84 um, origin (15.18, 16.32)
+                  (core corner snapped to the site grid)
+  Rows .......... 72 rows x 429 sites
+  Tap cells ..... 555,  endcaps 144
+  Utilization ... 42 %  (16,331 um^2 of cells incl. taps)
+  Output ........ results\04_floorplan.odb / .def
+
+---------------------------------------------------------------------
+STEP 5 : POWER DISTRIBUTION NETWORK  (OpenROAD pdngen)         [DONE]
+---------------------------------------------------------------------
+Why: every cell needs VPWR (1.8 V) and VGND. Build a low-resistance
+     metal grid from the chip pins down to each cell.
+
+Script flow\05_pdn.tcl
+  create nets VPWR (POWER) / VGND (GROUND)
+  add_global_connection  VPWR <- pins VPWR, VPB   VGND <- pins VGND, VNB
+  set_voltage_domain -name CORE -power VPWR -ground VGND
+  define_pdn_grid -name core -pins {met4 met5}   (grid = block power pins)
+  add_pdn_ring   met4/met5, width 1.6, spacing 1.7, 6 um from the core
+  add_pdn_stripe met1 0.48 um -followpins     rails on every cell row
+  add_pdn_stripe met4 1.6 um, pitch 50 um     vertical straps
+  add_pdn_stripe met5 1.6 um, pitch 50 um     horizontal straps
+  add_pdn_connect met1<->met4, met4<->met5    via stacks
+  pdngen ; check_power_grid -net VPWR / VGND
+
+Result (reports\05_pdn.log):
+  "All shapes on net VPWR are connected."   PASS
+  "All shapes on net VGND are connected."   PASS
+  Output: results\05_pdn.odb / .def
+
+---------------------------------------------------------------------
+STEP 6 : PLACEMENT  (OpenROAD gpl + resizer + dpl)             [DONE]
+---------------------------------------------------------------------
+Why: give every cell an (x,y) position so that wires are short and
+     timing is met, then fix electrical rules (slew/cap/fanout).
+
+Script flow\06_place.tcl
+  global_placement -skip_io -density 0.55   rough placement, no pins yet
+  place_pins -hor_layers met3 -ver_layers met2   59 IO pins on die edge,
+                                                  near the cells they feed
+  global_placement -density 0.55 -timing_driven  final global placement
+  estimate_parasitics -placement            wire RC from placed positions
+  set_dont_use clkdlybuf*/dlygate*/dlymetal*  (delay cells kept for hold)
+  buffer_ports -buffer_cell buf_4           buffer every IO port
+  repair_design -slew_margin 20 -cap_margin 20   fix slew / cap / fanout
+  repair_tie_fanout conb_1/HI , conb_1/LO   one tie cell per few loads
+  detailed_placement                        legalise: cells on rows/sites
+  optimize_mirroring                        flip cells to shorten wires
+  check_placement -verbose
+
+Problems met and fixed while running this step:
+  1) "invalid command name sta::find_corner"
+     -> in this new OpenROAD (26Q3) corners are called "scenes".
+        Fix: sta::find_scene / sta::worst_slack_scene
+  2) WNS printed as 0.000 -> OpenSTA returns seconds. Fix: x 1e9 -> ns.
+  3) buffer_ports picked clkdlybuf4s15_1 (a DELAY cell!) for all 58 IO
+     buffers -> slow IOs. Fix: -buffer_cell sky130_fd_sc_hd__buf_4 and
+     dont_use on delay cells during this step.
+
+Result (reports\06_place.log), clock still IDEAL (no clock tree yet):
+                  setup WNS     hold WNS
+  ss 100C 1.6V    +4.964 ns     +0.642 ns
+  tt  25C 1.8V   +12.911 ns     +0.188 ns
+  ff -40C 1.95V  +14.049 ns     +0.028 ns     -> all MET, TNS 0
+  Buffers ........ 105 inserted for 38 high-fanout nets (rst fanout 110,
+                   inverter fanout 81 ...) + 58 IO buffers (buf_4)
+  Slew / fanout / cap ... worst 0.60 ns / 10 / 0.00 pF  -> all MET
+                   (581 slew violations before layout -> 0 now)
+  Utilization .... 45 %  (17,407 um^2)
+  HPWL ........... 34.8 mm (half-perimeter wire length estimate)
+  Output ......... results\06_place.odb / .def
+
+---------------------------------------------------------------------
+STEP 7 : CLOCK TREE SYNTHESIS  (OpenROAD TritonCTS)            [DONE]
+---------------------------------------------------------------------
+Why: one clk pin cannot drive 322 flip-flops. Build a balanced tree of
+     clock buffers so the clock edge arrives at every FF at ~ the same
+     time (low skew). Then fix hold, which only shows up with a real
+     clock (clock now arrives LATE at some FFs).
+
+Script flow\07_cts.tcl
+  clock_tree_synthesis -root_buf clkbuf_16
+        -buf_list {clkbuf_2 clkbuf_4 clkbuf_8}
+        -sink_clustering_enable -sink_clustering_size 10
+        -sink_clustering_max_diameter 50
+  set_propagated_clock [all_clocks]      real clock delays from now on
+  repair_clock_nets ; detailed_placement
+  report_cts ; report_clock_skew
+  repair_timing -setup -setup_margin 0.2
+  repair_timing -hold  -hold_margin 0.1  (0.1 ns safety for routing)
+  detailed_placement ; check_placement
+
+Result (reports\07_cts.log):
+  Clock sinks ......... 322 FFs -> 39 clusters (leaf buffers)
+  Clock buffers ....... 48, 3 buffer levels from clk to every FF
+  Clock skew (setup) .. 0.27 ns
+  After CTS, before repair:
+     ff hold WNS +0.004 ns -> 76 endpoints below the 0.1 ns margin
+  repair_timing -hold: inserted 73 hold (delay) buffers
+                  setup WNS     hold WNS
+  ss 100C 1.6V    +4.951 ns     +0.812 ns
+  tt  25C 1.8V   +12.906 ns     +0.297 ns
+  ff -40C 1.95V  +14.365 ns     +0.100 ns     -> all MET
+  Slew / fanout / cap ... all MET
+  Utilization .... 49 %  (19,102 um^2)
+  Output ......... results\07_cts.odb / .def
+
+---------------------------------------------------------------------
+STEP 8 : ROUTING  (OpenROAD FastRoute + TritonRoute)           [DONE]
+---------------------------------------------------------------------
+Why: draw the real metal wires and vias for all 1517 signal nets,
+     with zero design-rule violations.
+
+Script flow\08_route.tcl
+  set_routing_layers -signal met1-met5 -clock met1-met5
+  global_route -guide_file results/08_route.guide -congestion_iterations 50
+        -> splits the chip in GCells and plans a path per net
+  estimate_parasitics -global_routing      RC from the planned routes
+  global_route -start_incremental
+  repair_design -slew_margin 40 -cap_margin 20   <- repair AFTER global
+  repair_timing -setup / -hold                      route (missing in
+  detailed_placement                                 LibreLane run 1)
+  global_route -end_incremental            re-route only changed nets
+  repair_antennas sky130_fd_sc_hd__diode_2 -iterations 3
+  detailed_route -output_drc reports/08_route_drc.rpt -droute_end_iter 64
+        -> real shapes; then search & repair until 0 DRC violations
+  filler_placement decap_12..decap_3 fill_2 fill_1   fill empty sites
+  check_antennas
+  write_def / write_verilog (signal netlist for STA) /
+  write_verilog -include_pwr_gnd (netlist with VPWR/VGND for LVS)
+
+Problems met and fixed while running this step:
+  1) [GRT-0069] Diode cell sky130_fd_sc_hd__diode_2/DIODE not found
+     -> repair_antennas wants only the cell name: sky130_fd_sc_hd__diode_2
+  2) [DRT-0509] -bottom_routing_layer is deprecated
+     -> removed; detailed_route takes the layers from set_routing_layers
+
+Result try 1 (reports\08_route_try1.log):
+  Global route: congestion met1 18.7 %, met2 22.0 %, met3 0.6 %
+                1 antenna violation -> fixed with 1 jumper -> 0
+  Timing after global route: ss setup +4.68 ns, ff hold +0.11 ns (MET)
+  Detailed route DRC per iteration:
+       887 -> 399 -> 342 -> 20 -> 0     "Complete detail routing"
+  Wire length ... 46.1 mm,  vias 11,114 (met1/met2 carry most signals,
+                  met4/met5 mostly the power grid)
+  Antenna ....... 0 net / 0 pin violations
+  Fillers ....... 2,720 decap / fill cells
+
+---------------------------------------------------------------------
+STEP 9 : RC EXTRACTION + SIGN-OFF STA  (OpenRCX + OpenSTA)
+---------------------------------------------------------------------
+Why: the timing so far used ESTIMATED wire RC. Now extract the real
+     resistance / capacitance of every routed wire and re-run STA.
+
+Script flow\09_signoff.sh
+  9a  openroad 09_rcx.tcl
+        read_db results/08_route.odb
+        extract_parasitics -ext_model_file rules.openrcx.sky130A.<c>.calibre
+        write_spef results/09_simple_cpu_v4.<min|nom|max>.spef
+  9b  sta 09_sta_signoff.tcl        (standalone OpenSTA)
+        define_corners ss tt ff ; read_liberty -corner ...
+        read_verilog results/08_route.v ; link_design ; read_sdc
+        set_propagated_clock [all_clocks]
+        read_spef -corner ss  max.spef     slow cells + max RC = worst setup
+        read_spef -corner tt  nom.spef
+        read_spef -corner ff  min.spef     fast cells + min RC = worst hold
+        report_checks / report_clock_skew / report_tns /
+        report_check_types -violators / report_power
+
+Result try 1 (reports\09_sta_signoff_try1.rpt):
+  Extraction: 1517 nets, 7363 R segments, 12,748 coupling caps
+                  setup WNS     hold WNS
+  ss + max RC     +4.378 ns     +0.860 ns
+  tt + nom RC    +12.675 ns     +0.318 ns
+  ff + min RC    +14.102 ns     +0.112 ns     -> timing MET, TNS 0 / 0
+  Clock skew ..... 0.28 ns setup, 0.26 ns hold
+  Power (tt) ..... 1.68 mW  (FFs 49 %, clock tree 34 %, logic 17 %)
+  MAX SLEW ....... ~50 pins VIOLATED at ss corner, worst 0.96 ns
+                   (limit 0.75).  e.g. fanout102/104/105 buffer nets
+  (Warnings "fill_1 / tapvpwrvgnd_1 not found, black box" are OK:
+   physical-only cells have no timing model.)
+
+DEBUG: why slew still fails
+  During step 8 the RC estimate said worst slew 0.67 ns (MET), but real
+  extraction gives 0.96 ns -> the estimate is ~40 % optimistic.
+  (LibreLane run 1 had exactly the same problem.)
+FIX: calibrate the margin -> repair_design -slew_margin 40 after
+  global route (target ~0.45 ns estimated = ~0.65 ns real).
+  Re-run step 8 and step 9.
+
+Re-run step 8 (reports\08_route.log):
+  repair_design resized 54 cells (stronger drivers on long nets)
+  2 antenna violations at global route -> fixed -> 0
+  Detailed route DRC: 950 -> 345 -> 422 -> 86 -> 0  "Complete detail routing"
+  Wire length 46.2 mm, 2715 fillers, antenna 0 / 0
+
+Re-run step 9  ==> FINAL SIGN-OFF TIMING (reports\09_sta_signoff.rpt)
+                  setup WNS     hold WNS
+  ss + max RC     +4.536 ns     +0.853 ns
+  tt + nom RC    +12.747 ns     +0.313 ns
+  ff + min RC    +14.309 ns     +0.105 ns
+  Setup TNS 0, Hold TNS 0                          PASS
+  Max slew   worst 0.62 ns (limit 0.75)            PASS  (was 0.96)
+  Max fanout worst 10 (limit 10)                   PASS
+  Max cap    all MET                               PASS
+  VIOLATED lines in report: 0
+  Clock skew 0.29 ns (setup) / 0.26 ns (hold)
+  Power (tt, 50 MHz): 1.68 mW
+       flip-flops 0.83 mW (49 %), clock tree 0.57 mW (34 %), logic 0.28 mW
+  Fmax estimate (ss corner) ~ 1 / (20 - 4.54 ns) ~ 64 MHz
+
+---------------------------------------------------------------------
+STEP 10 : GDSII STREAM-OUT  (Magic)                            [DONE]
+---------------------------------------------------------------------
+Why: the DEF only has cell NAMES + wires. The fab needs the real mask
+     shapes, so merge the DEF with the transistor-level std-cell GDS.
+
+Script flow\10_gds.tcl  (magic -dnull -noconsole -rcfile sky130A.magicrc)
+  gds readonly true ; gds rescale false
+  gds read  sky130_fd_sc_hd.gds      real layouts of all std cells
+  lef read  sky130_fd_sc_hd__nom.tlef   via definitions
+  def read  results/08_route.def     placement + routing
+  load simple_cpu_v4 ; gds write results/10_gds/simple_cpu_v4.gds
+
+Problem met and fixed:
+  First try: "DEF read: encountered 11077 errors" -
+     Via name "M1M2_PR" / "L1M1_PR_MR" unknown in route.
+  -> these vias are defined in the TECH LEF, not in the DEF. Without
+     them all 11,077 signal vias were missing (an open-circuit chip!)
+     even though a GDS file was written (2.1 MB).
+  Fix: lef read <tech lef> before def read.  Now 0 DEF errors, GDS 5.3 MB
+  Lesson: always read the log, "file was written" is not "file is right".
+
+Result: results\10_gds\simple_cpu_v4.gds
+  4936 cell instances, 1517 nets, 61 pins (59 signal + VPWR + VGND)
+  size 227.7 x 227.7 um
+
+---------------------------------------------------------------------
+STEP 11 : DRC - DESIGN RULE CHECK  (Magic, full sky130 deck)   [DONE]
+---------------------------------------------------------------------
+Why: check every shape against the foundry rules (min width, spacing,
+     enclosure, area ...). One violation = chip may not be manufacturable.
+
+Script flow\11_drc.tcl
+  gds read results/10_gds/simple_cpu_v4.gds ; load simple_cpu_v4
+  drc euclidean on ; drc style drc(full) ; drc check ; drc catchup
+  drc listall why  -> reports/11_drc.rpt
+
+Result:  "No errors found."   TOTAL DRC VIOLATIONS: 0          PASS
+
+---------------------------------------------------------------------
+STEP 12 : LVS - LAYOUT VS SCHEMATIC  (Magic extract + Netgen)  [DONE]
+---------------------------------------------------------------------
+Why: prove the drawn layout is electrically the same circuit as the
+     netlist: same cells, same connections, same pins.
+
+Scripts
+  12a flow\12_extract.tcl (magic): gds read ; extract all ; ext2spice lvs
+        ext2spice -o results/12_lvs/simple_cpu_v4.spice
+  12b flow\12_lvs_netgen.tcl (netgen -batch source):
+        layout = readnet spice results/12_lvs/simple_cpu_v4.spice
+        source = readnet spice sky130_fd_sc_hd.spice
+                 readnet verilog results/08_route_pwr.v
+        lvs layout source sky130A_setup.tcl reports/12_lvs.rpt
+
+Problem met and fixed:
+  First try (reports\12_lvs_try1.rpt): "Netlists do not match.
+     Top level cell failed pin matching." 1527 vs 1528 devices,
+     1542 vs 2806 nets, VPWR/VGND "(no pin, node is _noconnect_)".
+  Debug: in 08_route_pwr.v the cells added AFTER step 5 had no supply
+     pins, e.g.  dlygate4sd3_1 hold344 (.A(ex_load), .X(net344));
+                 decap_3 FILLER_0_109 ();
+     -> buffers / clock buffers / hold cells / fillers were never
+        connected to VPWR/VGND in the database (global_connect ran in
+        step 5 only). The LAYOUT was fine (cells touch the met1 rails),
+        only the NETLIST was missing the connections.
+  Fix: global_connect after the last cells are inserted
+       - added permanently at the end of flow\08_route.tcl
+       - applied now with flow\08b_global_connect.tcl (no re-routing):
+         "supply pins NOT connected before: 12104 / after: 0"
+     (GDS geometry is unchanged by this, so steps 10/11 stay valid.)
+
+Result (reports\12_lvs.rpt):
+  Circuit 1 (layout) 1527 devices, 1542 nets
+  Circuit 2 (netlist) 1527 devices, 1542 nets
+  "Final result: Circuits match uniquely."                     PASS
+
+---------------------------------------------------------------------
+STEP 13 : VIEW THE CHIP  (KLayout batch render)                [DONE]
+---------------------------------------------------------------------
+Script flow\13_render.py  (klayout -b -r 13_render.py, PDK sky130A.lyp colours)
+  results\13_images\chip_full.png  whole chip: power ring, met4/met5
+                                    straps, 72 rows of cells, IO pins
+  results\13_images\chip_zoom.png  30 x 30 um zoom: std cells between
+                                    met1 rails, met1/met2 signal wires
+To open the GDS interactively: klayout results\10_gds\simple_cpu_v4.gds
+
+Problem met (running the script by hand inside the container):
+  klayout -b -r 13_render.py  ->  ERROR: KeyError: 'RES'
+  -> the scripts read their paths from environment variables that are
+     set by flow/env.sh. Starting the tool directly in a new shell
+     skips that, so RES / DESIGN / PDKPATH do not exist.
+  Fix: run the wrapper  (bash 13_render.sh)  or first
+       source /foss/designs/Simplecpu4/flow/env.sh
+  (same for yosys / openroad / sta / magic scripts of every step)
+  13_render.py now also has default paths, so it runs either way.
+
+=====================================================================
+FINAL SIGN-OFF SUMMARY  -  simple_cpu_v4 in SKY130, 50 MHz
+=====================================================================
+  RTL simulation ............ TEST PASSED
+  Die size .................. 227.7 x 227.7 um  (0.052 mm^2)
+  Std cells (logic) ......... 1,522  + 3,414 tap/endcap/fill/decap
+  Flip-flops ................ 322
+  Utilization ............... 49 %
+  Wire length ............... 46.2 mm, ~11,000 vias
+  Setup WNS (ss, max RC) .... +4.536 ns   MET
+  Hold  WNS (ff, min RC) .... +0.105 ns   MET
+  TNS setup / hold .......... 0 / 0
+  Max slew / cap / fanout ... 0 violations
+  Clock skew ................ 0.29 ns
+  Power (tt) ................ 1.68 mW
+  Routing DRC ............... 0
+  Magic DRC ................. 0
+  LVS ....................... Circuits match uniquely
+  Antenna ................... 0
+  FINAL GDS ................. results\10_gds\simple_cpu_v4.gds
+
+  Compared with the automatic LibreLane run 1: same quality, plus the
+  229 slew violations of LibreLane are fixed here (post-route repair
+  with a calibrated 40 % slew margin).
+
+Bugs found + fixed along the way (good to remember):
+  synth : liberty not read (false "no driver"), lpflow cells, clkinv
+          cells used in logic, assign statements in netlist
+  place : delay cells used as IO buffers (buffer_ports)
+  tools : new OpenROAD API (scenes instead of corners, deprecated
+          options -bottom_routing_layer, diode cell name)
+  route : RC estimate 40 % optimistic -> slew violations at sign-off
+  gds   : tech LEF not read -> all vias missing
+  lvs   : supply pins of late-inserted cells not connected
+
+Re-run the whole flow (PowerShell, one step at a time):
+  set the docker prefix:  docker run --rm -it -v C:\Users\LENOVO\eda\designs\Simplecpu4:/foss/designs/Simplecpu4
+                          -w /foss/designs/Simplecpu4 hpretl/iic-osic-tools:latest --skip
+  <prefix> bash flow/01_sim.sh
+  <prefix> bash flow/02_synth.sh
+  <prefix> bash flow/03_sta_synth.sh
+  <prefix> bash flow/run_or.sh 04_floorplan
+  <prefix> bash flow/run_or.sh 05_pdn
+  <prefix> bash flow/run_or.sh 06_place
+  <prefix> bash flow/run_or.sh 07_cts
+  <prefix> bash flow/run_or.sh 08_route
+  <prefix> bash flow/09_signoff.sh
+  <prefix> bash flow/10_gds.sh
+  <prefix> bash flow/11_drc.sh
+  <prefix> bash flow/12_lvs.sh
+  <prefix> bash flow/13_render.sh
+
+
+=====================================================================
+APPENDIX : automated reference run with LibreLane (for comparison)
+=====================================================================
+Before doing it by hand, the same RTL was pushed through LibreLane
+(automatic flow, config.json) once to know what "good" looks like.
+  Die 207.81 x 218.53 um, 2173 std cells, util 51 %, 2.11 mW
+  Setup WNS +3.55 ns (ss), hold WNS +0.11 ns (ff)  -> timing PASS
+  DRC 0, LVS 0, antenna 0                          -> PASS
+  Max-slew violations 229 at ss corner             -> to be fixed
+    cause: no repair after global routing (estimated wires were too
+    optimistic). In the manual flow we add repair_design after
+    global_route (step 08).
+  Results: runs\run1\

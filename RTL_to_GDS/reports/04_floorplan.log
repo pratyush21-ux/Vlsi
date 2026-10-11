@@ -1,0 +1,28 @@
+OpenROAD 26Q3-1621-g21512b0ab 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 12 thread(s).
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef, created 14 layers, 25 vias
+[WARNING ODB-0220] WARNING (LEFPARS-2008): NOWIREEXTENSIONATPIN statement is obsolete in version 5.6 or later.
+The NOWIREEXTENSIONATPIN statement will be ignored. See file /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef at line 2.
+
+[INFO ODB-0227] LEF file: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef, created 437 library cells
+[INFO IFP-0107] Defining die area using utilization: 40.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (15.000, 15.000) snapped to (15.180, 16.320).
+[INFO IFP-0001] Added 72 rows of 429 site unithd.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 227.715 227.715 ) um
+[INFO IFP-0101] Core BBox: ( 15.180 16.320 ) ( 212.520 212.160 ) um
+[INFO IFP-0102] Core area:                        38647.066 um^2
+[INFO IFP-0103] Total instances area:             15636.246 um^2
+[INFO IFP-0104] Effective utilization:                0.405
+[INFO IFP-0105] Number of instances:                   1211
+[INFO TAP-0004] Inserted 144 endcaps.
+[INFO TAP-0005] Inserted 555 tapcells.
+
+================ FLOORPLAN ================
+  die  : 227.72 x 227.72 um
+  core : 197.34 x 195.84 um  (origin 15.18, 16.32)
+  rows : 72
+  tap/endcap cells : 699
+Design area 16331 um^2 42% utilization.

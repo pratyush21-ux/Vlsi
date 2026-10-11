@@ -1,0 +1,7 @@
+# allow step logs here (the repo root .gitignore excludes *.log)
+!*.log
+# never commit
+*.odb
+*.ext
+*.vcd
+*.vvp

@@ -1,0 +1,8 @@
+VCD info: dumpfile simple_cpu_v4_tb.vcd opened for output.
+M[200] = 55 (expect 55)
+M[201] = 108 (expect 108)
+M[202] = 0 (expect 0)
+PC     = 16 (expect 15/16 spin loop)
+RB=55 RC=0 RH=11
+TEST PASSED
+/foss/designs/RTL_to_GDS/tb/simple_cpu_v4_tb.v:81: $finish called at 6050000 (1ps)

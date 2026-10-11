@@ -1,0 +1,7 @@
+*.sh  text eol=lf
+*.tcl text eol=lf
+*.py  text eol=lf
+*.sdc text eol=lf
+*.v   text eol=lf
+*.gds binary
+*.png binary

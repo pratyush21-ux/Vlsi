@@ -20,6 +20,7 @@ I am looking for a **VLSI Design / Verification Engineer** role (internships and
 |   |-- FSM/            Door_Lock_FSM, Traffic_Light_Controller, Washing_Machine
 |   |-- DSP/            FIR_Filter
 |   `-- Internship/     basic digital design blocks and testbenches
+|-- RTL_to_GDS/         full RTL -> GDSII flow of a pipelined CPU in SKY130 (scripts, reports, GDS)
 |-- UVM/                FW_ALU, FW_FIFO*, FW_Zeroriscy_ALU*, FW_decoder
 `-- SV/                 FIFO_verification, ALU_verification*, Decoder_verification*
 ```
@@ -40,10 +41,15 @@ Each folder has its own README with details and simulation steps.
 | [`RTL/FSM/Door_Lock_FSM/`](RTL/FSM/Door_Lock_FSM) | Door lock system: FSM controller, password checker, top module, testbench and design document | Verilog |
 | [`RTL/FSM/Traffic_Light_Controller/`](RTL/FSM/Traffic_Light_Controller) | FSM-based traffic light controller with clock divider and testbench | Verilog |
 | [`RTL/FSM/Washing_Machine/`](RTL/FSM/Washing_Machine) | FSM-based washing machine controller with testbench | Verilog |
+| [`RTL_to_GDS/`](RTL_to_GDS) | Complete RTL-to-GDSII implementation of a 5-stage pipelined 16-bit CPU in SkyWater 130 nm, run step by step: synthesis, pre-layout STA, floorplan, power grid, placement, CTS, routing, RC extraction, multi-corner sign-off STA, GDS, DRC and LVS. All scripts, logs, reports and the final GDS | Yosys, OpenSTA, OpenROAD, Magic, Netgen, KLayout, Docker |
 | [`SV/FIFO_verification/`](SV/FIFO_verification) | Class-based SystemVerilog testbench for a 32 x 8 synchronous FIFO: generator, driver, monitor, scoreboard, SVA assertions, functional coverage, 7 tests, run in QuestaSim | SystemVerilog, SVA, QuestaSim |
 | [`UVM/`](UVM) | UVM verification environment for a 32-bit RISC-V style ALU: sequence, driver, monitor, agent, scoreboard, coverage. Results and architecture are documented in the folder README (source code kept private) | SystemVerilog, UVM, QuestaSim |
 
 ## Highlights
+
+- **RTL to GDSII in SKY130:** a 16-bit pipelined CPU taken from Verilog to a DRC-clean, LVS-matched layout with open-source tools, one step at a time. Timing met at 50 MHz in all three corners (setup +4.54 ns at ss), 0 DRC, LVS match. See [`RTL_to_GDS`](RTL_to_GDS).
+
+  <a href="RTL_to_GDS"><img src="RTL_to_GDS/docs/images/chip_full.png" alt="SimpleCPU v4 layout in SKY130" width="360"></a>
 
 - **UVM ALU verification:** complete UVM testbench with a golden-reference scoreboard, 70,000+ constrained-random transactions, 100 percent functional coverage and zero failures. See [`UVM/FW_ALU`](UVM/FW_ALU).
 - **SystemVerilog FIFO verification:** layered testbench with assertions, functional coverage and 7 directed and random tests. See [`SV/FIFO_verification`](SV/FIFO_verification).

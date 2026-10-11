@@ -1,0 +1,1603 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68 (git sha1 38e001a6f, Release, GNU /usr/bin/c++ 13.3.0)
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Liberty frontend: /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: /foss/designs/Simplecpu4/RTL/Simplecpu.v
+Parsing SystemVerilog input from `/foss/designs/Simplecpu4/RTL/Simplecpu.v' to AST representation.
+Generating RTLIL representation for module `\simple_cpu_v4'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+
+3.2. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+Removed 0 unused modules.
+
+4. Executing SYNTH pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1.1. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+
+4.1.2. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+Removed 0 unused modules.
+
+4.2. Executing PROC pass (convert processes to netlists).
+
+4.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 6 switch rules as full_case in process $proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112 in module simple_cpu_v4.
+Marked 1 switch rules as full_case in process $proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:163$92 in module simple_cpu_v4.
+Removed a total of 0 dead cases.
+
+4.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 3 redundant assignments.
+Promoted 14 assignments to connections.
+
+4.2.4. Executing PROC_INIT pass (extract init attributes).
+
+4.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~9 debug messages>
+
+4.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+     1/46: $2$mem2bits$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:226$11[15:0]$142
+     2/46: $2$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$140
+     3/46: $2$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_DATA[15:0]$139
+     4/46: $2$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_ADDR[2:0]$138
+     5/46: $1\i[31:0]
+     6/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$132
+     7/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$131
+     8/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$130
+     9/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$129
+    10/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$128
+    11/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$127
+    12/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$126
+    13/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$125
+    14/46: $0\wb_valid[0:0]
+    15/46: $0\ma_valid[0:0]
+    16/46: $0\ex_valid[0:0]
+    17/46: $1$mem2bits$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:226$11[15:0]$136
+    18/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$135
+    19/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_DATA[15:0]$134
+    20/46: $1$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_ADDR[2:0]$133
+    21/46: $0\wb_wen[0:0]
+    22/46: $0\wb_rd[2:0]
+    23/46: $0\wb_res[15:0]
+    24/46: $0\ma_sdata[15:0]
+    25/46: $0\ma_store[0:0]
+    26/46: $0\ma_load[0:0]
+    27/46: $0\ma_wen[0:0]
+    28/46: $0\ma_rd[2:0]
+    29/46: $0\ma_res[15:0]
+    30/46: $0\ex_pc[11:0]
+    31/46: $0\ex_jtest[15:0]
+    32/46: $0\ex_jtarget[11:0]
+    33/46: $0\ex_jkind[1:0]
+    34/46: $0\ex_jump[0:0]
+    35/46: $0\ex_sdata[15:0]
+    36/46: $0\ex_store[0:0]
+    37/46: $0\ex_load[0:0]
+    38/46: $0\ex_wen[0:0]
+    39/46: $0\ex_rd[2:0]
+    40/46: $0\ex_b[15:0]
+    41/46: $0\ex_a[15:0]
+    42/46: $0\ex_alu[2:0]
+    43/46: $0\id_pc[11:0]
+    44/46: $0\id_ir[15:0]
+    45/46: $0\id_valid[0:0]
+    46/46: $0\pc[11:0]
+Creating decoders for process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:163$92'.
+     1/1: $1\alu_y[15:0]
+
+4.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\simple_cpu_v4.\alu_y' from process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:163$92'.
+
+4.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\simple_cpu_v4.\i' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$424' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\pc' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$425' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\id_valid' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$426' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\id_ir' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$427' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\id_pc' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$428' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_valid' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$429' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_alu' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$430' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_a' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$431' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_b' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$432' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_rd' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$433' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_wen' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$434' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_load' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$435' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_store' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$436' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_sdata' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$437' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_jump' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$438' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_jkind' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$439' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_jtarget' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$440' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_jtest' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$441' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ex_pc' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$442' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_valid' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$443' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_res' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$444' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_rd' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$445' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_wen' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$446' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_load' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$447' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_store' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$448' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\ma_sdata' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$449' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\wb_valid' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$450' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\wb_res' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$451' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\wb_rd' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$452' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.\wb_wen' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$453' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$454' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$455' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$456' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$457' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$458' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$459' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$460' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$461' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_ADDR' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$462' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_DATA' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$463' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$464' with positive edge clock.
+Creating register for signal `\simple_cpu_v4.$mem2bits$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:226$11' using process `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+  created $dff cell `$procdff$465' with positive edge clock.
+
+4.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+Removing empty process `simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:187$112'.
+Found and cleaned up 1 empty switch in `\simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:163$92'.
+Removing empty process `simple_cpu_v4.$proc$/foss/designs/Simplecpu4/RTL/Simplecpu.v:163$92'.
+Cleaned up 9 empty switches.
+
+4.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~27 debug messages>
+
+4.3. Executing CHECK pass (checking for obvious problems).
+Checking module simple_cpu_v4...
+Found and reported 0 problems.
+
+4.4. Executing FLATTEN pass (flatten design).
+
+4.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 17 unused cells and 197 unused wires.
+<suppressed ~19 debug messages>
+
+4.7. Executing CHECK pass (checking for obvious problems).
+Checking module simple_cpu_v4...
+Found and reported 0 problems.
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 257 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 236 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 235 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+<suppressed ~66 debug messages>
+Removed a total of 22 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$193.
+    dead port 1/2 on $mux $procmux$187.
+    dead port 1/2 on $mux $procmux$181.
+Removed 3 multiplexer ports.
+<suppressed ~137 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+    Consolidated identical input bits for $mux cell $procmux$220:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$2_EN[15:0]$113 [0] }
+    Consolidated identical input bits for $mux cell $procmux$217:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$3_EN[15:0]$114 [0] }
+    Consolidated identical input bits for $mux cell $procmux$214:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$4_EN[15:0]$115 [0] }
+    Consolidated identical input bits for $mux cell $procmux$211:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$5_EN[15:0]$116 [0] }
+    Consolidated identical input bits for $mux cell $procmux$208:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$6_EN[15:0]$117 [0] }
+    Consolidated identical input bits for $mux cell $procmux$205:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$7_EN[15:0]$118 [0] }
+    Consolidated identical input bits for $mux cell $procmux$202:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$8_EN[15:0]$119 [0] }
+    Consolidated identical input bits for $mux cell $procmux$199:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:194$9_EN[15:0]$120 [0] }
+    Consolidated identical input bits for $mux cell $procmux$178:
+      Old ports: A=16'0000000000000000, B=16'1111111111111111, Y=$procmux$178_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$178_Y [0]
+      New connections: $procmux$178_Y [15:1] = { $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] $procmux$178_Y [0] }
+  Optimizing cells in module \simple_cpu_v4.
+    Consolidated identical input bits for $mux cell $procmux$235:
+      Old ports: A=$2$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$140, B=16'0000000000000000, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123
+      New ports: A=$procmux$178_Y [0], B=1'0, Y=$0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0]
+      New connections: $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [15:1] = { $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] $0$memwr$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:197$10_EN[15:0]$123 [0] }
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 10 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 232 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 225 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+4.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 31 unused wires.
+<suppressed ~1 debug messages>
+
+4.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~120 debug messages>
+
+4.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 225 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+4.9. Executing FSM pass (extract and optimize FSM).
+
+4.9.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register simple_cpu_v4.ex_jkind.
+Found FSM state register simple_cpu_v4.ex_alu.
+
+4.9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\ex_jkind' from module `\simple_cpu_v4'.
+  found $dff cell for state register: $procdff$439
+  root of input selection tree: $0\ex_jkind[1:0]
+  found ctrl input: \rst
+  found ctrl input: \id_issue
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$32_Y
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$33_Y
+  found state code: 2'00
+  found state code: 2'10
+  found state code: 2'01
+  found ctrl output: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:174$98_Y
+  found ctrl output: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:175$99_Y
+  found ctrl output: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:176$103_Y
+  ctrl inputs: { $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$33_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$32_Y \id_issue \rst }
+  ctrl outputs: { $0\ex_jkind[1:0] $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:176$103_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:175$99_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:174$98_Y }
+  transition:       2'00 4'--00 ->       2'00 5'00001
+  transition:       2'00 4'0010 ->       2'00 5'00001
+  transition:       2'00 4'1010 ->       2'10 5'10001
+  transition:       2'00 4'-110 ->       2'01 5'01001
+  transition:       2'00 4'---1 ->       2'00 5'00001
+  transition:       2'10 4'--00 ->       2'10 5'10100
+  transition:       2'10 4'0010 ->       2'00 5'00100
+  transition:       2'10 4'1010 ->       2'10 5'10100
+  transition:       2'10 4'-110 ->       2'01 5'01100
+  transition:       2'10 4'---1 ->       2'10 5'10100
+  transition:       2'01 4'--00 ->       2'01 5'01010
+  transition:       2'01 4'0010 ->       2'00 5'00010
+  transition:       2'01 4'1010 ->       2'10 5'10010
+  transition:       2'01 4'-110 ->       2'01 5'01010
+  transition:       2'01 4'---1 ->       2'01 5'01010
+Extracting FSM `\ex_alu' from module `\simple_cpu_v4'.
+  found $dff cell for state register: $procdff$430
+  root of input selection tree: $0\ex_alu[2:0]
+  found ctrl input: \rst
+  found ctrl input: \id_issue
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$23_Y
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$24_Y
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$26_Y
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$28_Y
+  found ctrl input: $or$/foss/designs/Simplecpu4/RTL/Simplecpu.v:235$158_Y
+  found ctrl input: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:123$37_Y
+  found ctrl input: \is_rmov
+  found ctrl input: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:238$162_Y
+  found ctrl input: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:239$165_Y
+  found ctrl input: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:240$168_Y
+  found state code: 3'000
+  found state code: 3'011
+  found state code: 3'010
+  found state code: 3'001
+  found state code: 3'100
+  found ctrl output: $procmux$420_CMP
+  found ctrl output: $procmux$421_CMP
+  found ctrl output: $procmux$422_CMP
+  found ctrl output: $procmux$423_CMP
+  ctrl inputs: { $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:240$168_Y $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:239$165_Y $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:238$162_Y $or$/foss/designs/Simplecpu4/RTL/Simplecpu.v:235$158_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:123$37_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$28_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$26_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$24_Y $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$23_Y \id_issue \is_rmov \rst }
+  ctrl outputs: { $procmux$423_CMP $procmux$422_CMP $procmux$421_CMP $procmux$420_CMP $0\ex_alu[2:0] }
+  transition:      3'000 12'---------0-0 ->      3'000 7'0000000
+  transition:      3'000 12'000000000100 ->      3'000 7'0000000
+  transition:      3'000 12'100000000100 ->      3'011 7'0000011
+  transition:      3'000 12'-10000000100 ->      3'010 7'0000010
+  transition:      3'000 12'--1000000100 ->      3'001 7'0000001
+  transition:      3'000 12'---000000110 ->      3'000 7'0000000
+  transition:      3'000 12'---0100001-0 ->      3'100 7'0000100
+  transition:      3'000 12'---1-00001-0 ->      3'001 7'0000001
+  transition:      3'000 12'-----10001-0 ->      3'011 7'0000011
+  transition:      3'000 12'------1001-0 ->      3'010 7'0000010
+  transition:      3'000 12'-------101-0 ->      3'001 7'0000001
+  transition:      3'000 12'--------11-0 ->      3'000 7'0000000
+  transition:      3'000 12'-----------1 ->      3'000 7'0000000
+  transition:      3'100 12'---------0-0 ->      3'100 7'0001100
+  transition:      3'100 12'000000000100 ->      3'000 7'0001000
+  transition:      3'100 12'100000000100 ->      3'011 7'0001011
+  transition:      3'100 12'-10000000100 ->      3'010 7'0001010
+  transition:      3'100 12'--1000000100 ->      3'001 7'0001001
+  transition:      3'100 12'---000000110 ->      3'000 7'0001000
+  transition:      3'100 12'---0100001-0 ->      3'100 7'0001100
+  transition:      3'100 12'---1-00001-0 ->      3'001 7'0001001
+  transition:      3'100 12'-----10001-0 ->      3'011 7'0001011
+  transition:      3'100 12'------1001-0 ->      3'010 7'0001010
+  transition:      3'100 12'-------101-0 ->      3'001 7'0001001
+  transition:      3'100 12'--------11-0 ->      3'000 7'0001000
+  transition:      3'100 12'-----------1 ->      3'100 7'0001100
+  transition:      3'010 12'---------0-0 ->      3'010 7'0100010
+  transition:      3'010 12'000000000100 ->      3'000 7'0100000
+  transition:      3'010 12'100000000100 ->      3'011 7'0100011
+  transition:      3'010 12'-10000000100 ->      3'010 7'0100010
+  transition:      3'010 12'--1000000100 ->      3'001 7'0100001
+  transition:      3'010 12'---000000110 ->      3'000 7'0100000
+  transition:      3'010 12'---0100001-0 ->      3'100 7'0100100
+  transition:      3'010 12'---1-00001-0 ->      3'001 7'0100001
+  transition:      3'010 12'-----10001-0 ->      3'011 7'0100011
+  transition:      3'010 12'------1001-0 ->      3'010 7'0100010
+  transition:      3'010 12'-------101-0 ->      3'001 7'0100001
+  transition:      3'010 12'--------11-0 ->      3'000 7'0100000
+  transition:      3'010 12'-----------1 ->      3'010 7'0100010
+  transition:      3'001 12'---------0-0 ->      3'001 7'1000001
+  transition:      3'001 12'000000000100 ->      3'000 7'1000000
+  transition:      3'001 12'100000000100 ->      3'011 7'1000011
+  transition:      3'001 12'-10000000100 ->      3'010 7'1000010
+  transition:      3'001 12'--1000000100 ->      3'001 7'1000001
+  transition:      3'001 12'---000000110 ->      3'000 7'1000000
+  transition:      3'001 12'---0100001-0 ->      3'100 7'1000100
+  transition:      3'001 12'---1-00001-0 ->      3'001 7'1000001
+  transition:      3'001 12'-----10001-0 ->      3'011 7'1000011
+  transition:      3'001 12'------1001-0 ->      3'010 7'1000010
+  transition:      3'001 12'-------101-0 ->      3'001 7'1000001
+  transition:      3'001 12'--------11-0 ->      3'000 7'1000000
+  transition:      3'001 12'-----------1 ->      3'001 7'1000001
+  transition:      3'011 12'---------0-0 ->      3'011 7'0010011
+  transition:      3'011 12'000000000100 ->      3'000 7'0010000
+  transition:      3'011 12'100000000100 ->      3'011 7'0010011
+  transition:      3'011 12'-10000000100 ->      3'010 7'0010010
+  transition:      3'011 12'--1000000100 ->      3'001 7'0010001
+  transition:      3'011 12'---000000110 ->      3'000 7'0010000
+  transition:      3'011 12'---0100001-0 ->      3'100 7'0010100
+  transition:      3'011 12'---1-00001-0 ->      3'001 7'0010001
+  transition:      3'011 12'-----10001-0 ->      3'011 7'0010011
+  transition:      3'011 12'------1001-0 ->      3'010 7'0010010
+  transition:      3'011 12'-------101-0 ->      3'001 7'0010001
+  transition:      3'011 12'--------11-0 ->      3'000 7'0010000
+  transition:      3'011 12'-----------1 ->      3'011 7'0010011
+
+4.9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\ex_alu$480' from module `\simple_cpu_v4'.
+Optimizing FSM `$fsm$\ex_jkind$475' from module `\simple_cpu_v4'.
+
+4.9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 25 unused cells and 25 unused wires.
+<suppressed ~26 debug messages>
+
+4.9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\ex_jkind$475' from module `\simple_cpu_v4'.
+  Removing unused output signal $0\ex_jkind[1:0] [0].
+  Removing unused output signal $0\ex_jkind[1:0] [1].
+Optimizing FSM `$fsm$\ex_alu$480' from module `\simple_cpu_v4'.
+  Removing unused output signal $0\ex_alu[2:0] [0].
+  Removing unused output signal $0\ex_alu[2:0] [1].
+  Removing unused output signal $0\ex_alu[2:0] [2].
+
+4.9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\ex_jkind$475' from module `\simple_cpu_v4' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+Recoding FSM `$fsm$\ex_alu$480' from module `\simple_cpu_v4' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  000 -> ----1
+  100 -> ---1-
+  010 -> --1--
+  001 -> -1---
+  011 -> 1----
+
+4.9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\ex_jkind$475' from module `simple_cpu_v4':
+-------------------------------------
+
+  Information on FSM $fsm$\ex_jkind$475 (\ex_jkind):
+
+  Number of input signals:    4
+  Number of output signals:   3
+  Number of state bits:       3
+
+  Input signals:
+    0: \rst
+    1: \id_issue
+    2: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$32_Y
+    3: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:122$33_Y
+
+  Output signals:
+    0: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:174$98_Y
+    1: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:175$99_Y
+    2: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:176$103_Y
+
+  State encoding:
+    0:      3'--1
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 4'--00   ->     0 3'001
+      1:     0 4'0010   ->     0 3'001
+      2:     0 4'---1   ->     0 3'001
+      3:     0 4'1010   ->     1 3'001
+      4:     0 4'-110   ->     2 3'001
+      5:     1 4'0010   ->     0 3'100
+      6:     1 4'--00   ->     1 3'100
+      7:     1 4'1010   ->     1 3'100
+      8:     1 4'---1   ->     1 3'100
+      9:     1 4'-110   ->     2 3'100
+     10:     2 4'0010   ->     0 3'010
+     11:     2 4'1010   ->     1 3'010
+     12:     2 4'--00   ->     2 3'010
+     13:     2 4'-110   ->     2 3'010
+     14:     2 4'---1   ->     2 3'010
+
+-------------------------------------
+
+FSM `$fsm$\ex_alu$480' from module `simple_cpu_v4':
+-------------------------------------
+
+  Information on FSM $fsm$\ex_alu$480 (\ex_alu):
+
+  Number of input signals:   12
+  Number of output signals:   4
+  Number of state bits:       5
+
+  Input signals:
+    0: \rst
+    1: \is_rmov
+    2: \id_issue
+    3: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$23_Y
+    4: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$24_Y
+    5: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$26_Y
+    6: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:119$28_Y
+    7: $eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:123$37_Y
+    8: $or$/foss/designs/Simplecpu4/RTL/Simplecpu.v:235$158_Y
+    9: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:238$162_Y
+   10: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:239$165_Y
+   11: $and$/foss/designs/Simplecpu4/RTL/Simplecpu.v:240$168_Y
+
+  Output signals:
+    0: $procmux$420_CMP
+    1: $procmux$421_CMP
+    2: $procmux$422_CMP
+    3: $procmux$423_CMP
+
+  State encoding:
+    0:    5'----1
+    1:    5'---1-
+    2:    5'--1--
+    3:    5'-1---
+    4:    5'1----
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 12'000000000100   ->     0 4'0000
+      1:     0 12'---000000110   ->     0 4'0000
+      2:     0 12'---------0-0   ->     0 4'0000
+      3:     0 12'--------11-0   ->     0 4'0000
+      4:     0 12'-----------1   ->     0 4'0000
+      5:     0 12'---0100001-0   ->     1 4'0000
+      6:     0 12'-10000000100   ->     2 4'0000
+      7:     0 12'------1001-0   ->     2 4'0000
+      8:     0 12'--1000000100   ->     3 4'0000
+      9:     0 12'---1-00001-0   ->     3 4'0000
+     10:     0 12'-------101-0   ->     3 4'0000
+     11:     0 12'100000000100   ->     4 4'0000
+     12:     0 12'-----10001-0   ->     4 4'0000
+     13:     1 12'000000000100   ->     0 4'0001
+     14:     1 12'---000000110   ->     0 4'0001
+     15:     1 12'--------11-0   ->     0 4'0001
+     16:     1 12'---------0-0   ->     1 4'0001
+     17:     1 12'---0100001-0   ->     1 4'0001
+     18:     1 12'-----------1   ->     1 4'0001
+     19:     1 12'-10000000100   ->     2 4'0001
+     20:     1 12'------1001-0   ->     2 4'0001
+     21:     1 12'--1000000100   ->     3 4'0001
+     22:     1 12'---1-00001-0   ->     3 4'0001
+     23:     1 12'-------101-0   ->     3 4'0001
+     24:     1 12'100000000100   ->     4 4'0001
+     25:     1 12'-----10001-0   ->     4 4'0001
+     26:     2 12'000000000100   ->     0 4'0100
+     27:     2 12'---000000110   ->     0 4'0100
+     28:     2 12'--------11-0   ->     0 4'0100
+     29:     2 12'---0100001-0   ->     1 4'0100
+     30:     2 12'-10000000100   ->     2 4'0100
+     31:     2 12'---------0-0   ->     2 4'0100
+     32:     2 12'------1001-0   ->     2 4'0100
+     33:     2 12'-----------1   ->     2 4'0100
+     34:     2 12'--1000000100   ->     3 4'0100
+     35:     2 12'---1-00001-0   ->     3 4'0100
+     36:     2 12'-------101-0   ->     3 4'0100
+     37:     2 12'100000000100   ->     4 4'0100
+     38:     2 12'-----10001-0   ->     4 4'0100
+     39:     3 12'000000000100   ->     0 4'1000
+     40:     3 12'---000000110   ->     0 4'1000
+     41:     3 12'--------11-0   ->     0 4'1000
+     42:     3 12'---0100001-0   ->     1 4'1000
+     43:     3 12'-10000000100   ->     2 4'1000
+     44:     3 12'------1001-0   ->     2 4'1000
+     45:     3 12'--1000000100   ->     3 4'1000
+     46:     3 12'---------0-0   ->     3 4'1000
+     47:     3 12'---1-00001-0   ->     3 4'1000
+     48:     3 12'-------101-0   ->     3 4'1000
+     49:     3 12'-----------1   ->     3 4'1000
+     50:     3 12'100000000100   ->     4 4'1000
+     51:     3 12'-----10001-0   ->     4 4'1000
+     52:     4 12'000000000100   ->     0 4'0010
+     53:     4 12'---000000110   ->     0 4'0010
+     54:     4 12'--------11-0   ->     0 4'0010
+     55:     4 12'---0100001-0   ->     1 4'0010
+     56:     4 12'-10000000100   ->     2 4'0010
+     57:     4 12'------1001-0   ->     2 4'0010
+     58:     4 12'--1000000100   ->     3 4'0010
+     59:     4 12'---1-00001-0   ->     3 4'0010
+     60:     4 12'-------101-0   ->     3 4'0010
+     61:     4 12'100000000100   ->     4 4'0010
+     62:     4 12'---------0-0   ->     4 4'0010
+     63:     4 12'-----10001-0   ->     4 4'0010
+     64:     4 12'-----------1   ->     4 4'0010
+
+-------------------------------------
+
+4.9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\ex_jkind$475' from module `\simple_cpu_v4'.
+Mapping FSM `$fsm$\ex_alu$480' from module `\simple_cpu_v4'.
+
+4.10. Executing OPT pass (performing simple optimizations).
+
+4.10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~16 debug messages>
+
+4.10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 248 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 241 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+<suppressed ~21 debug messages>
+Removed a total of 7 cells.
+
+4.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~102 debug messages>
+
+4.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 241 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.10.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$444 ($dff) from module simple_cpu_v4 (D = \alu_y, Q = \ma_res).
+Adding SRST signal on $procdff$450 ($dff) from module simple_cpu_v4 (D = \ma_valid, Q = \wb_valid, rval = 1'0).
+Adding SRST signal on $procdff$425 ($dff) from module simple_cpu_v4 (D = $procmux$413_Y, Q = \pc, rval = 12'000000000000).
+Adding EN signal on $auto$ff.cc:337:slice$596 ($sdff) from module simple_cpu_v4 (D = $procmux$413_Y, Q = \pc).
+Adding SRST signal on $procdff$426 ($dff) from module simple_cpu_v4 (D = $procmux$405_Y, Q = \id_valid, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$600 ($sdff) from module simple_cpu_v4 (D = $procmux$405_Y, Q = \id_valid).
+Adding SRST signal on $procdff$427 ($dff) from module simple_cpu_v4 (D = $procmux$397_Y, Q = \id_ir, rval = 16'0000000000000000).
+Adding EN signal on $auto$ff.cc:337:slice$604 ($sdff) from module simple_cpu_v4 (D = \mem_rdata, Q = \id_ir).
+Adding SRST signal on $procdff$428 ($dff) from module simple_cpu_v4 (D = $procmux$391_Y, Q = \id_pc, rval = 12'000000000000).
+Adding EN signal on $auto$ff.cc:337:slice$606 ($sdff) from module simple_cpu_v4 (D = \pc, Q = \id_pc).
+Adding SRST signal on $procdff$429 ($dff) from module simple_cpu_v4 (D = \id_issue, Q = \ex_valid, rval = 1'0).
+Adding EN signal on $procdff$431 ($dff) from module simple_cpu_v4 (D = $memrd$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:224$144_DATA, Q = \ex_a).
+Adding EN signal on $procdff$432 ($dff) from module simple_cpu_v4 (D = $procmux$350_Y, Q = \ex_b).
+Adding EN signal on $procdff$448 ($dff) from module simple_cpu_v4 (D = \ex_store, Q = \ma_store).
+Adding EN signal on $procdff$433 ($dff) from module simple_cpu_v4 (D = \d_rd, Q = \ex_rd).
+Adding SRST signal on $auto$ff.cc:337:slice$620 ($dffe) from module simple_cpu_v4 (D = $ternary$/foss/designs/Simplecpu4/RTL/Simplecpu.v:137$56_Y, Q = \ex_rd, rval = 3'000).
+Adding SRST signal on $procdff$443 ($dff) from module simple_cpu_v4 (D = \ex_valid, Q = \ma_valid, rval = 1'0).
+Adding EN signal on $procdff$447 ($dff) from module simple_cpu_v4 (D = \ex_load, Q = \ma_load).
+Adding EN signal on $procdff$434 ($dff) from module simple_cpu_v4 (D = \d_wen, Q = \ex_wen).
+Adding EN signal on $procdff$435 ($dff) from module simple_cpu_v4 (D = \is_load, Q = \ex_load).
+Adding EN signal on $procdff$436 ($dff) from module simple_cpu_v4 (D = \is_stor, Q = \ex_store).
+Adding EN signal on $procdff$437 ($dff) from module simple_cpu_v4 (D = $memrd$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:222$143_DATA, Q = \ex_sdata).
+Adding EN signal on $procdff$449 ($dff) from module simple_cpu_v4 (D = \ex_sdata, Q = \ma_sdata).
+Adding EN signal on $procdff$453 ($dff) from module simple_cpu_v4 (D = \ma_wen, Q = \wb_wen).
+Adding EN signal on $procdff$452 ($dff) from module simple_cpu_v4 (D = \ma_rd, Q = \wb_rd).
+Adding EN signal on $procdff$441 ($dff) from module simple_cpu_v4 (D = $memrd$\rf$/foss/designs/Simplecpu4/RTL/Simplecpu.v:224$144_DATA, Q = \ex_jtest).
+Adding EN signal on $procdff$445 ($dff) from module simple_cpu_v4 (D = \ex_rd, Q = \ma_rd).
+Adding EN signal on $procdff$440 ($dff) from module simple_cpu_v4 (D = $ternary$/foss/designs/Simplecpu4/RTL/Simplecpu.v:226$152_Y, Q = \ex_jtarget).
+Adding EN signal on $procdff$451 ($dff) from module simple_cpu_v4 (D = $ternary$/foss/designs/Simplecpu4/RTL/Simplecpu.v:203$141_Y, Q = \wb_res).
+Adding EN signal on $procdff$442 ($dff) from module simple_cpu_v4 (D = \id_pc, Q = \ex_pc).
+Adding EN signal on $procdff$446 ($dff) from module simple_cpu_v4 (D = \ex_wen, Q = \ma_wen).
+Adding EN signal on $procdff$438 ($dff) from module simple_cpu_v4 (D = \is_jump, Q = \ex_jump).
+
+4.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 41 unused cells and 69 unused wires.
+<suppressed ~43 debug messages>
+
+4.10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~2 debug messages>
+
+4.10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 224 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 214 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 204 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 203 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+<suppressed ~63 debug messages>
+Removed a total of 21 cells.
+
+4.10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 20 unused wires.
+<suppressed ~1 debug messages>
+
+4.10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.10.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.10.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.10.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 203 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.10.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.10.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.10.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.10.23. Finished fast OPT passes. (There is nothing left to do.)
+
+4.11. Executing WREDUCE pass (reducing word size of cells).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$466 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$467 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$468 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$469 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$470 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$471 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$472 (rf).
+Removed top 29 address bits (of 32) from memory init port simple_cpu_v4.$auto$proc_memwr.cc:45:proc_memwr$473 (rf).
+Removed top 1 bits (of 8) from port B of cell simple_cpu_v4.$auto$fsm_map.cc:77:implement_pattern_cache$547 ($eq).
+Removed top 6 bits (of 9) from port B of cell simple_cpu_v4.$auto$fsm_map.cc:77:implement_pattern_cache$530 ($eq).
+Removed top 9 bits (of 12) from port B of cell simple_cpu_v4.$auto$fsm_map.cc:77:implement_pattern_cache$528 ($eq).
+Removed top 2 bits (of 4) from port B of cell simple_cpu_v4.$auto$fsm_map.cc:77:implement_pattern_cache$495 ($eq).
+Removed top 3 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:117$15 ($eq).
+Removed top 1 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:120$30 ($eq).
+Removed top 1 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:121$31 ($eq).
+Removed top 11 bits (of 12) from port B of cell simple_cpu_v4.$add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:168$96 ($add).
+Removed top 3 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:232$155 ($eq).
+Removed top 2 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:233$156 ($eq).
+Removed top 2 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:234$157 ($eq).
+Removed top 2 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:238$161 ($eq).
+Removed top 2 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:239$164 ($eq).
+Removed top 1 bits (of 4) from port B of cell simple_cpu_v4.$eq$/foss/designs/Simplecpu4/RTL/Simplecpu.v:240$167 ($eq).
+Removed top 11 bits (of 12) from port B of cell simple_cpu_v4.$add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:257$170 ($add).
+Removed top 8 bits (of 16) from wire simple_cpu_v4.k8z.
+
+4.12. Executing PEEPOPT pass (run peephole optimizers).
+
+4.13. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.14. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module simple_cpu_v4:
+  creating $macc model for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:257$170 ($add).
+  creating $macc model for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:227$150 ($add).
+  creating $macc model for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:168$96 ($add).
+  creating $macc model for $sub$/foss/designs/Simplecpu4/RTL/Simplecpu.v:166$94 ($sub).
+  creating $macc model for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:165$93 ($add).
+  creating $alu model for $macc $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:165$93.
+  creating $alu model for $macc $sub$/foss/designs/Simplecpu4/RTL/Simplecpu.v:166$94.
+  creating $alu model for $macc $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:168$96.
+  creating $alu model for $macc $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:227$150.
+  creating $alu model for $macc $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:257$170.
+  creating $alu cell for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:257$170: $auto$alumacc.cc:548:replace_alu$675
+  creating $alu cell for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:227$150: $auto$alumacc.cc:548:replace_alu$678
+  creating $alu cell for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:168$96: $auto$alumacc.cc:548:replace_alu$681
+  creating $alu cell for $sub$/foss/designs/Simplecpu4/RTL/Simplecpu.v:166$94: $auto$alumacc.cc:548:replace_alu$684
+  creating $alu cell for $add$/foss/designs/Simplecpu4/RTL/Simplecpu.v:165$93: $auto$alumacc.cc:548:replace_alu$687
+  created 5 $alu and 0 $macc cells.
+
+4.15. Executing SHARE pass (SAT-based resource sharing).
+
+4.16. Executing OPT pass (performing simple optimizations).
+
+4.16.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.16.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 203 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.16.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~41 debug messages>
+
+4.16.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.16.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 203 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.16.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.16.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.16.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.16.9. Finished fast OPT passes. (There is nothing left to do.)
+
+4.17. Executing MEMORY pass.
+
+4.17.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.17.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 28 transformations.
+
+4.17.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing simple_cpu_v4.rf write port 0.
+  Analyzing simple_cpu_v4.rf write port 1.
+  Analyzing simple_cpu_v4.rf write port 2.
+  Analyzing simple_cpu_v4.rf write port 3.
+  Analyzing simple_cpu_v4.rf write port 4.
+  Analyzing simple_cpu_v4.rf write port 5.
+  Analyzing simple_cpu_v4.rf write port 6.
+  Analyzing simple_cpu_v4.rf write port 7.
+  Analyzing simple_cpu_v4.rf write port 8.
+
+4.17.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.17.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\rf'[0] in module `\simple_cpu_v4': merging output FF to cell.
+    Write port 0: don't care on collision.
+    Write port 1: don't care on collision.
+    Write port 2: don't care on collision.
+    Write port 3: don't care on collision.
+    Write port 4: don't care on collision.
+    Write port 5: don't care on collision.
+    Write port 6: don't care on collision.
+    Write port 7: don't care on collision.
+    Write port 8: non-transparent.
+Checking read port `\rf'[1] in module `\simple_cpu_v4': no output FF found.
+Checking read port `\rf'[2] in module `\simple_cpu_v4': no output FF found.
+Checking read port address `\rf'[1] in module `\simple_cpu_v4': merged address FF to cell.
+Checking read port address `\rf'[2] in module `\simple_cpu_v4': merged address FF to cell.
+
+4.17.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 1 unused cells and 17 unused wires.
+<suppressed ~2 debug messages>
+
+4.17.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+Consolidating read ports of memory simple_cpu_v4.rf by address:
+Consolidating write ports of memory simple_cpu_v4.rf by address:
+  Merging ports 0, 1 (address 3'000).
+  Merging ports 0, 2 (address 3'000).
+  Merging ports 0, 3 (address 3'000).
+  Merging ports 0, 4 (address 3'000).
+  Merging ports 6, 7 (address 3'110).
+Consolidating write ports of memory simple_cpu_v4.rf by address:
+  Merging ports 1, 2 (address 3'101).
+Consolidating write ports of memory simple_cpu_v4.rf by address:
+Consolidating write ports of memory simple_cpu_v4.rf using sat-based resource sharing:
+
+4.17.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.17.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.17.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.19. Executing OPT pass (performing simple optimizations).
+
+4.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~10 debug messages>
+
+4.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 186 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.19.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.19.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 9 unused wires.
+<suppressed ~1 debug messages>
+
+4.19.5. Finished fast OPT passes.
+
+4.20. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \rf in module \simple_cpu_v4:
+  created 8 $dff cells and 0 static cells of width 16.
+Extracted data FF from read port 0 of simple_cpu_v4.rf: $\rf$rdreg[0]
+Extracted addr FF from read port 1 of simple_cpu_v4.rf: $\rf$rdreg[1]
+Extracted addr FF from read port 2 of simple_cpu_v4.rf: $\rf$rdreg[2]
+  read interface: 3 $dff and 21 $mux cells.
+  write interface: 24 write mux blocks.
+
+4.21. Executing OPT pass (performing simple optimizations).
+
+4.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~74 debug messages>
+
+4.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 249 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.21.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~102 debug messages>
+
+4.21.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.21.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 249 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.21.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $pmux $procmux$419 in front of them:
+        $auto$alumacc.cc:548:replace_alu$684
+        $auto$alumacc.cc:548:replace_alu$687
+
+4.21.7. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $\rf$rdreg[1] ($dff) from module simple_cpu_v4 (D = $auto$rtlil.cc:3402:Mux$711, Q = $\rf$rdreg[1]$q, rval = 3'000).
+Adding SRST signal on $\rf$rdreg[2] ($dff) from module simple_cpu_v4 (D = $auto$rtlil.cc:3402:Mux$716, Q = $\rf$rdreg[2]$q, rval = 3'000).
+
+4.21.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 2 unused cells and 111 unused wires.
+<suppressed ~3 debug messages>
+
+4.21.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~1 debug messages>
+
+4.21.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.21.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~102 debug messages>
+
+4.21.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+    New ctrl vector for $pmux cell $procmux$419: { \ex_alu [1] \ex_alu [4] $auto$opt_reduce.cc:137:opt_pmux$980 }
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 1 changes.
+
+4.21.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 249 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.21.14. Executing OPT_SHARE pass.
+
+4.21.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\rf[0]$719 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[0][2][0]$y$857, Q = \rf[0]).
+Adding EN signal on $memory\rf[1]$721 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[1][2][0]$y$873, Q = \rf[1]).
+Adding EN signal on $memory\rf[2]$723 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[2][2][0]$y$891, Q = \rf[2]).
+Adding EN signal on $memory\rf[3]$725 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[3][2][0]$y$905, Q = \rf[3]).
+Adding EN signal on $memory\rf[4]$727 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[4][2][0]$y$925, Q = \rf[4]).
+Adding EN signal on $memory\rf[5]$729 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[5][2][0]$y$939, Q = \rf[5]).
+Adding EN signal on $memory\rf[6]$731 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[6][2][0]$y$955, Q = \rf[6]).
+Adding EN signal on $memory\rf[7]$733 ($dff) from module simple_cpu_v4 (D = $memory\rf$wrmux[7][2][0]$y$969, Q = \rf[7]).
+
+4.21.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.21.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~16 debug messages>
+
+4.21.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.21.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~94 debug messages>
+
+4.21.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.21.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 249 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.21.22. Executing OPT_SHARE pass.
+
+4.21.23. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $auto$ff.cc:337:slice$981 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[0], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$984 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[1], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$987 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[2], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$990 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[3], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$993 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[4], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$996 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[5], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$999 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[6], rval = 16'0000000000000000).
+Adding SRST signal on $auto$ff.cc:337:slice$1002 ($dffe) from module simple_cpu_v4 (D = \wb_res, Q = \rf[7], rval = 16'0000000000000000).
+
+4.21.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 8 unused cells and 16 unused wires.
+<suppressed ~9 debug messages>
+
+4.21.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.21.26. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.21.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \simple_cpu_v4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~78 debug messages>
+
+4.21.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \simple_cpu_v4.
+Performed a total of 0 changes.
+
+4.21.29. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 241 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.21.30. Executing OPT_SHARE pass.
+
+4.21.31. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+
+4.21.33. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.21.34. Finished fast OPT passes. (There is nothing left to do.)
+
+4.22. Executing TECHMAP pass (map to technology primitives).
+
+4.22.1. Executing Verilog-2005 frontend: /foss/tools/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/foss/tools/yosys/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+4.22.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdffce.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $mux.
+Running "alumacc" on wrapper $extern:wrap:$neg:Y_WIDTH=16:A_WIDTH=16:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:Y_WIDTH=16:A_WIDTH=16:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:Y_WIDTH=16:A_WIDTH=16:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using template $paramod$8f780356cb6cdb52f6a744190131b65634639c4e\_90_alu for cells of type $alu.
+Using template $paramod$ee3d784672cdb1cb32d9a801a3af776716f16b74\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001100 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using template $paramod$02488ff6fa51b28bbfa470bdd9b0e548b3357746\_90_alu for cells of type $alu.
+No more expansions possible.
+<suppressed ~999 debug messages>
+
+4.23. Executing OPT pass (performing simple optimizations).
+
+4.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+<suppressed ~715 debug messages>
+
+4.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 1675 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 1604 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 1575 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 1567 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Computing hashes of 1563 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+<suppressed ~336 debug messages>
+Removed a total of 112 cells.
+
+4.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 84 unused cells and 485 unused wires.
+<suppressed ~85 debug messages>
+
+4.23.5. Finished fast OPT passes.
+
+4.24. Executing ABC pass (technology mapping using ABC).
+
+4.24.1. Extracting gate netlist of module `\simple_cpu_v4' to `<abc-temp-dir>/input.blif'..
+
+4.24.1.1. Executed ABC.
+Extracted 1157 gates and 1448 wires to a netlist network with 289 inputs and 142 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug 25 2026 11:19:26)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+4.24.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      118
+ABC RESULTS:            ANDNOT cells:       32
+ABC RESULTS:               MUX cells:      299
+ABC RESULTS:              NAND cells:      211
+ABC RESULTS:               NOR cells:       36
+ABC RESULTS:               NOT cells:        6
+ABC RESULTS:                OR cells:       58
+ABC RESULTS:             ORNOT cells:       17
+ABC RESULTS:              XNOR cells:       49
+ABC RESULTS:               XOR cells:       44
+ABC RESULTS:        internal signals:     1017
+ABC RESULTS:           input signals:      289
+ABC RESULTS:          output signals:      142
+Removing temp directory.
+Removing global temp directory.
+
+4.25. Executing OPT pass (performing simple optimizations).
+
+4.25.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module simple_cpu_v4.
+
+4.25.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\simple_cpu_v4'.
+Computing hashes of 1192 cells of `\simple_cpu_v4'.
+Finding duplicate cells in `\simple_cpu_v4'.
+Removed a total of 0 cells.
+
+4.25.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.25.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 762 unused wires.
+<suppressed ~21 debug messages>
+
+4.25.5. Finished fast OPT passes.
+
+4.26. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `simple_cpu_v4'. Setting top module to simple_cpu_v4.
+
+4.26.1. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+
+4.26.2. Analyzing design hierarchy..
+Top module:  \simple_cpu_v4
+Removed 0 unused modules.
+
+4.27. Printing statistics.
+
+=== simple_cpu_v4 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      897 wires
+     1324 wire bits
+       60 public wires
+      483 public wire bits
+        7 ports
+       59 port bits
+     1192 cells
+       32   $_ANDNOT_
+      118   $_AND_
+       58   $_DFFE_PN_
+       76   $_DFFE_PP_
+        7   $_DFF_P_
+      299   $_MUX_
+      211   $_NAND_
+       36   $_NOR_
+        6   $_NOT_
+       17   $_ORNOT_
+       58   $_OR_
+      128   $_SDFFCE_PN0P_
+        3   $_SDFFCE_PP0P_
+       41   $_SDFFE_PP0P_
+        9   $_SDFF_PP0_
+       49   $_XNOR_
+       44   $_XOR_
+
+4.28. Executing CHECK pass (checking for obvious problems).
+Checking module simple_cpu_v4...
+Found and reported 0 problems.
+
+5. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_1 (noninv, pins=3, area=20.02) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtn_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_NN0_.
+  cell sky130_fd_sc_hd__dfrtp_1 (noninv, pins=4, area=25.02) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__edfxtp_1 (noninv, pins=4, area=30.03) is a direct match for cell type $_DFFE_PP_.
+  cell sky130_fd_sc_hd__dfbbn_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_NNN_.
+  cell sky130_fd_sc_hd__dfbbp_1 (noninv, pins=6, area=32.53) is a direct match for cell type $_DFFSR_PNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    \sky130_fd_sc_hd__dfrtn_1 _DFF_NN0_ (.CLK_N( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    \sky130_fd_sc_hd__edfxtp_1 _DFFE_PP_ (.CLK( C), .D( D), .DE( E), .Q( Q));
+    \sky130_fd_sc_hd__dfbbn_1 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \sky130_fd_sc_hd__dfbbp_1 _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+5.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\simple_cpu_v4':
+  mapped 265 $_DFFE_PP_ cells to \sky130_fd_sc_hd__edfxtp_1 cells.
+  mapped 57 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_1 cells.
+
+6. Executing ABC pass (technology mapping using ABC).
+
+6.1. Extracting gate netlist of module `\simple_cpu_v4' to `<abc-temp-dir>/input.blif'..
+
+6.1.1. Executed ABC.
+Extracted 1150 gates and 1456 wires to a netlist network with 305 inputs and 348 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Aug 25 2026 11:19:26)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_scl /tmp/yosys-liberty-scl-cache/yosys_merged_9471a0e4.scl 
+ABC: Warning: Detected 9 multi-output cells (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + retime -o -D 20000 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf -D 20000 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+6.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__a2111oi_0 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a21o_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_1 cells:       54
+ABC RESULTS:   sky130_fd_sc_hd__a221o_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a221oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_1 cells:       10
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_1 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__a32oi_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__and2_0 cells:      139
+ABC RESULTS:   sky130_fd_sc_hd__and3_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__inv_1 cells:       79
+ABC RESULTS:   sky130_fd_sc_hd__maj3_1 cells:       15
+ABC RESULTS:   sky130_fd_sc_hd__mux2_1 cells:       45
+ABC RESULTS:   sky130_fd_sc_hd__mux2i_1 cells:       44
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:       64
+ABC RESULTS:   sky130_fd_sc_hd__nand2_1 cells:       61
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__nand3_1 cells:       13
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand4_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nand4b_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor2_1 cells:       96
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_1 cells:        7
+ABC RESULTS:   sky130_fd_sc_hd__nor3_1 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor4_1 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o211a_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o21a_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_0 cells:       63
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_1 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_1 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o32a_1 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o41ai_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or2_0 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__or3_1 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__or4_1 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_1 cells:       50
+ABC RESULTS:   sky130_fd_sc_hd__xor2_1 cells:       24
+ABC RESULTS:        internal signals:      803
+ABC RESULTS:           input signals:      305
+ABC RESULTS:          output signals:      348
+Removing temp directory.
+Removing global temp directory.
+
+7. Executing SETUNDEF pass (replace undef values with defined constants).
+
+8. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \simple_cpu_v4..
+Removed 0 unused cells and 1541 unused wires.
+<suppressed ~89 debug messages>
+
+10. Executing HILOMAP pass (mapping to constant drivers).
+
+11. Executing INSBUF pass (insert buffer cells for connected wires).
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6276: \pc[0] -> \dbg_pc [0]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6277: \pc[1] -> \dbg_pc [1]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6278: \pc[2] -> \dbg_pc [2]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6279: \pc[3] -> \dbg_pc [3]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6280: \pc[4] -> \dbg_pc [4]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6281: \pc[5] -> \dbg_pc [5]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6282: \pc[6] -> \dbg_pc [6]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6283: \pc[7] -> \dbg_pc [7]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6284: \pc[8] -> \dbg_pc [8]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6285: \pc[9] -> \dbg_pc [9]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6286: \pc[10] -> \dbg_pc [10]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6287: \pc[11] -> \dbg_pc [11]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6288: \ma_sdata[0] -> \mem_wdata [0]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6289: \ma_sdata[1] -> \mem_wdata [1]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6290: \ma_sdata[2] -> \mem_wdata [2]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6291: \ma_sdata[3] -> \mem_wdata [3]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6292: \ma_sdata[4] -> \mem_wdata [4]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6293: \ma_sdata[5] -> \mem_wdata [5]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6294: \ma_sdata[6] -> \mem_wdata [6]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6295: \ma_sdata[7] -> \mem_wdata [7]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6296: \ma_sdata[8] -> \mem_wdata [8]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6297: \ma_sdata[9] -> \mem_wdata [9]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6298: \ma_sdata[10] -> \mem_wdata [10]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6299: \ma_sdata[11] -> \mem_wdata [11]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6300: \ma_sdata[12] -> \mem_wdata [12]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6301: \ma_sdata[13] -> \mem_wdata [13]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6302: \ma_sdata[14] -> \mem_wdata [14]
+Add simple_cpu_v4/$auto$insbuf.cc:97:execute$6303: \ma_sdata[15] -> \mem_wdata [15]
+
+12. Executing CHECK pass (checking for obvious problems).
+Checking module simple_cpu_v4...
+Found and reported 0 problems.
+
+13. Printing statistics.
+
+=== simple_cpu_v4 ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+     1177        - wires
+     1229        - wire bits
+      343        - public wires
+      395        - public wire bits
+        7        - ports
+       59        - port bits
+     1211 1.56E+04 cells
+        1    8.758   sky130_fd_sc_hd__a2111oi_0
+        1    7.507   sky130_fd_sc_hd__a211oi_1
+        8   60.058   sky130_fd_sc_hd__a21o_1
+       54  270.259   sky130_fd_sc_hd__a21oi_1
+        1    10.01   sky130_fd_sc_hd__a221o_1
+        1    8.758   sky130_fd_sc_hd__a221oi_1
+       10   75.072   sky130_fd_sc_hd__a22oi_1
+        1    8.758   sky130_fd_sc_hd__a311oi_1
+        6   37.536   sky130_fd_sc_hd__a31oi_1
+        4   35.034   sky130_fd_sc_hd__a32oi_1
+      139  869.584   sky130_fd_sc_hd__and2_0
+        7   43.792   sky130_fd_sc_hd__and3_1
+       28  140.134   sky130_fd_sc_hd__buf_2
+       57 1.14E+03   sky130_fd_sc_hd__dfxtp_1
+      265 7.96E+03   sky130_fd_sc_hd__edfxtp_1
+       79  296.534   sky130_fd_sc_hd__inv_1
+       15  150.144   sky130_fd_sc_hd__maj3_1
+       45  506.736   sky130_fd_sc_hd__mux2_1
+       44  440.422   sky130_fd_sc_hd__mux2i_1
+       64 1.44E+03   sky130_fd_sc_hd__mux4_2
+       61   228.97   sky130_fd_sc_hd__nand2_1
+        8   50.048   sky130_fd_sc_hd__nand2b_1
+       13   65.062   sky130_fd_sc_hd__nand3_1
+        1    7.507   sky130_fd_sc_hd__nand3b_1
+        4   25.024   sky130_fd_sc_hd__nand4_1
+        1    8.758   sky130_fd_sc_hd__nand4b_1
+       96  360.346   sky130_fd_sc_hd__nor2_1
+        7   43.792   sky130_fd_sc_hd__nor2b_1
+        9   45.043   sky130_fd_sc_hd__nor3_1
+        2   15.014   sky130_fd_sc_hd__nor3b_1
+        8   50.048   sky130_fd_sc_hd__nor4_1
+        1    8.758   sky130_fd_sc_hd__o2111ai_1
+        1    10.01   sky130_fd_sc_hd__o211a_1
+        3   22.522   sky130_fd_sc_hd__o211ai_1
+        3   22.522   sky130_fd_sc_hd__o21a_1
+       63  315.302   sky130_fd_sc_hd__o21ai_0
+        1    10.01   sky130_fd_sc_hd__o21ba_1
+        5   43.792   sky130_fd_sc_hd__o221ai_1
+        5    31.28   sky130_fd_sc_hd__o22ai_1
+        2   15.014   sky130_fd_sc_hd__o31ai_1
+        3   30.029   sky130_fd_sc_hd__o32a_1
+        1    8.758   sky130_fd_sc_hd__o41ai_1
+        4   25.024   sky130_fd_sc_hd__or2_0
+        1    6.256   sky130_fd_sc_hd__or3_1
+        4   30.029   sky130_fd_sc_hd__or4_1
+       50   437.92   sky130_fd_sc_hd__xnor2_1
+       24  210.202   sky130_fd_sc_hd__xor2_1
+
+   Chip area for module '\simple_cpu_v4': 15636.246400
+     of which used for sequential elements: 9098.726400 (58.19%)
+
+14. Executing Verilog backend.
+Dumping module `\simple_cpu_v4'.
+
+End of script. Logfile hash: c0d81dcc1e, time: 1.58s, user: 0.56s, system: 0.20s, MEM: 73.23 MB peak
+Yosys 0.68 (git sha1 38e001a6f, Release, GNU /usr/bin/c++ 13.3.0)
+Time spent: 46% 2x abc (0 sec), 9% 22x opt_clean (0 sec), ...
